@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
-import { prepareBenchmarkOntologyInput } from "@/pipeline/benchmark-ontology/prepare-benchmark-ontology";
+import { mapPipelineError, runBenchmarkOntologyPipeline } from "@/lib/llm/pipeline-api";
 import type { ApiResult } from "@/schemas/api-result";
 import type { BenchmarkOntologyPrepareResponse } from "@/schemas/benchmark-ontology";
 
@@ -10,7 +10,7 @@ export async function POST(
 ): Promise<NextResponse<ApiResult<BenchmarkOntologyPrepareResponse>>> {
   try {
     const body = await request.json();
-    const data = prepareBenchmarkOntologyInput(body);
+    const data = await runBenchmarkOntologyPipeline(body);
 
     return NextResponse.json({ ok: true, data });
   } catch (error) {
@@ -20,7 +20,7 @@ export async function POST(
           ok: false,
           error: {
             code: "VALIDATION_ERROR",
-            message: "요청 형식이 Benchmark ontology 준비 단계 schema와 맞지 않습니다.",
+            message: "Request does not match the benchmark ontology prepare schema.",
             details: error.flatten(),
           },
         },
@@ -28,15 +28,18 @@ export async function POST(
       );
     }
 
+    const mapped = mapPipelineError(error);
+
     return NextResponse.json(
       {
         ok: false,
         error: {
-          code: "PREPARE_BENCHMARK_ONTOLOGY_FAILED",
-          message: "Benchmark ontology 준비 단계에서 오류가 발생했습니다.",
+          code: mapped.code,
+          message: mapped.message,
+          details: mapped.details,
         },
       },
-      { status: 500 },
+      { status: mapped.status },
     );
   }
 }

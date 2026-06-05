@@ -1,0 +1,2964 @@
+{
+  "sourceChunks": [
+    {
+      "id": "chunk-0001",
+      "text": "In our previous session, we characterized learning in AI systems and organizations as a process of using feedback to assign credit to problem-solving actions.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0002",
+      "text": "By convention, we will from now on usually refer to feedback as \"information\".",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0003",
+      "text": "This term will flexibly stand in for data, sense perceptions, or knowledge while we study how intelligently learning to assign credit depends on assumptions about information units.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 2
+    },
+    {
+      "id": "chunk-0004",
+      "text": "Establishing some shared terminology",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0005",
+      "text": "Before diving into the two approaches to information, let us establish some shared terminology.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0006",
+      "text": "This shared terminology will empower us to think about credit assignment in precise terms across diverse AI ideas.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0007",
+      "text": "First, by information, we will refer not just to numerical data, but to any types of symbols for describing physical objects in, or concepts about, the world.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0008",
+      "text": "Symbols may include alphabetic characters, words, images, videos, sound waves, or any other observations that can be recorded.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0009",
+      "text": "Second, we will refer to any use of information to learn to assign credit to a problem as \"information processing\".",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0010",
+      "text": "By information processing, we will refer broadly to actions for storing, manipulating, displaying, and otherwise trafficking in information by agents interacting with problem-solving environments.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0011",
+      "text": "Third, we will view information processing as acts of communication among agents, and AI systems and organizations as communication systems.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0012",
+      "text": "What agents do to be intelligent is essentially package information into messages that they send, or receive and evaluate messages from other agents.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0013",
+      "text": "These actions are collectively referred to as \"message passing\", such that AI systems and organizations can also be called message passing systems.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 2
+    },
+    {
+      "id": "chunk-0014",
+      "text": "Communication systems support information processing.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0015",
+      "text": "Message passing systems require symbols.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0016",
+      "text": "Feedback depends on information.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 2
+    },
+    {
+      "id": "chunk-0017",
+      "text": "Framing credit assignment",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0018",
+      "text": "With this terminology established, we can now frame the general intelligence problem of credit assignment in information processing terms:",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0019",
+      "text": "Assigning credit is an information process of evaluating patterns in symbols about problems.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0020",
+      "text": "Challenges of assigning credit arise from the need to evaluate more complex symbolic patterns.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0021",
+      "text": "AI ideas differ in the symbolic patterns that they take to be the basic units of information and, as a result, in how they conceive of the capacity required to process these patterns.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0022",
+      "text": "Approach 1: Shannon information (syntactic information processing)",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0023",
+      "text": "In a 1948 paper, Shannon introduced an approach to thinking about information that has been so influential that it is still often simply called \"information theory\".",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0024",
+      "text": "He developed his approach while solving problems of routing calls over complex telephone networks at Bell Labs, yet Shannon had in mind a general theory of communication in any system.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0025",
+      "text": "We will understand the Shannon information approach in terms of three assumptions: information processing as syntactic; units of information as meaningless bits; and intelligently learning to assign credit as ultimately a matter of brute force.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0026",
+      "text": "Shannon proposed binary digits that he called \"bits\" as the building block units of syntactic information processing.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0027",
+      "text": "Bits are linked together into messages as patterns called bit strings.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0028",
+      "text": "Shannon also formalized a measure of uncertainty about the statistical distribution of message probabilities as a quantity that he called \"entropy\".",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 2
+    },
+    {
+      "id": "chunk-0029",
+      "text": "Telephone networks support syntactic processing.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0030",
+      "text": "Syntactic processing uses bit strings.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0031",
+      "text": "Entropy depends on bits.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 2
+    },
+    {
+      "id": "chunk-0032",
+      "text": "Credit assignment as a challenge of limited channel capacity",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0033",
+      "text": "What do Shannon's assumptions about bits and entropy imply about learning to assign credit?",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0034",
+      "text": "Overall, an agent's ability to learn to assign credit is a matter of their capacity for processing syntactic information.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0035",
+      "text": "Shannon described limits to this capacity as arising from physical channels, or restricted pathways to send and receive messages, such as telephone networks or fiber optic cables.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 2
+    },
+    {
+      "id": "chunk-0036",
+      "text": "Limits to channel capacity mean that only a certain amount of information, or bandwidth, can be processed at a certain speed over any one period of time.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0037",
+      "text": "A conventional TV channel has access to only a limited amount of bandwidth, while fiber optic cables in a 5G network have more capacity.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0038",
+      "text": "Channel capacity limits mean that information in messages is noisy when symbolic patterns are communicated with only limited reliability.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 2
+    },
+    {
+      "id": "chunk-0039",
+      "text": "Syntactic capacity limits information processing.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0040",
+      "text": "Fiber optic network has more capacity.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0041",
+      "text": "Approach 2: Simon information (semantic information processing)",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0042",
+      "text": "In a famous 1962 paper titled \"The Architecture of Complexity\", Herbert Simon described an alternative to Shannon's approach.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0043",
+      "text": "Simon developed his approach from research on decision-making in organizations and simulations of solving logic puzzles and playing chess.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0044",
+      "text": "We will contrast Simon information from Shannon's approach in terms of three assumptions: information processing as semantic and not just syntactic; the fundamental units of information as meaningful lists, rather than meaningless bits; and intelligent information processing as a matter of abstracting a problem to modularize it, rather than just adding channel capacity.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0045",
+      "text": "Simon proposed that bits should be organized into meaningful patterns called lists.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0046",
+      "text": "Lists differ from bits in that they have a name designating what the symbols externally refer to in the physical or conceptual world.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    },
+    {
+      "id": "chunk-0047",
+      "text": "Simon information contrasts with Shannon information.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 0
+    },
+    {
+      "id": "chunk-0048",
+      "text": "Reinforcement learning uses message passing.",
+      "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+      "sectionId": "section-003",
+      "sectionTitle": "Introduction",
+      "sentenceIndex": 1
+    }
+  ],
+  "relationTypes": [
+    {
+      "id": "solves",
+      "name": "solves",
+      "category": "problem",
+      "description": "An approach resolves a problem.",
+      "argumentPattern": "approach -> problem",
+      "examples": [
+        "approach solves problem"
+      ],
+      "allowedSourceTypes": [
+        "approach"
+      ],
+      "allowedTargetTypes": [
+        "problem"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "addresses",
+      "name": "addresses",
+      "category": "problem",
+      "description": "An approach responds to or handles a problem.",
+      "argumentPattern": "approach -> problem",
+      "examples": [
+        "approach addresses problem"
+      ],
+      "allowedSourceTypes": [
+        "approach"
+      ],
+      "allowedTargetTypes": [
+        "problem"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "arises_in",
+      "name": "arises_in",
+      "category": "problem",
+      "description": "A problem appears inside a structure.",
+      "argumentPattern": "problem -> structure",
+      "examples": [
+        "problem arises_in structure"
+      ],
+      "allowedSourceTypes": [
+        "problem"
+      ],
+      "allowedTargetTypes": [
+        "structure"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "constrains",
+      "name": "constrains",
+      "category": "problem",
+      "description": "A property constrains a problem.",
+      "argumentPattern": "property -> problem",
+      "examples": [
+        "property constrains problem"
+      ],
+      "allowedSourceTypes": [
+        "property"
+      ],
+      "allowedTargetTypes": [
+        "problem"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "results_from",
+      "name": "results_from",
+      "category": "problem",
+      "description": "A problem results from a structure.",
+      "argumentPattern": "problem -> structure",
+      "examples": [
+        "problem results_from structure"
+      ],
+      "allowedSourceTypes": [
+        "problem"
+      ],
+      "allowedTargetTypes": [
+        "structure"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "uses",
+      "name": "uses",
+      "category": "approach",
+      "description": "An approach uses a structure.",
+      "argumentPattern": "approach -> structure",
+      "examples": [
+        "approach uses structure"
+      ],
+      "allowedSourceTypes": [
+        "approach"
+      ],
+      "allowedTargetTypes": [
+        "structure"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "operates_on",
+      "name": "operates_on",
+      "category": "approach",
+      "description": "An approach operates on an element.",
+      "argumentPattern": "approach -> element",
+      "examples": [
+        "approach operates_on element"
+      ],
+      "allowedSourceTypes": [
+        "approach"
+      ],
+      "allowedTargetTypes": [
+        "element"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "assumes",
+      "name": "assumes",
+      "category": "approach",
+      "description": "An approach assumes a property.",
+      "argumentPattern": "approach -> property",
+      "examples": [
+        "approach assumes property"
+      ],
+      "allowedSourceTypes": [
+        "approach"
+      ],
+      "allowedTargetTypes": [
+        "property"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "reduces",
+      "name": "reduces",
+      "category": "approach",
+      "description": "An approach reduces a structure or its complexity.",
+      "argumentPattern": "approach -> structure",
+      "examples": [
+        "approach reduces structure"
+      ],
+      "allowedSourceTypes": [
+        "approach"
+      ],
+      "allowedTargetTypes": [
+        "structure"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "improves",
+      "name": "improves",
+      "category": "approach",
+      "description": "An approach improves a problem state.",
+      "argumentPattern": "approach -> problem",
+      "examples": [
+        "approach improves problem"
+      ],
+      "allowedSourceTypes": [
+        "approach"
+      ],
+      "allowedTargetTypes": [
+        "problem"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "composed_of",
+      "name": "composed_of",
+      "category": "structure",
+      "description": "A structure is composed of an element.",
+      "argumentPattern": "structure -> element",
+      "examples": [
+        "structure composed_of element"
+      ],
+      "allowedSourceTypes": [
+        "structure"
+      ],
+      "allowedTargetTypes": [
+        "element"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "has_property",
+      "name": "has_property",
+      "category": "structure",
+      "description": "A structure has a property.",
+      "argumentPattern": "structure -> property",
+      "examples": [
+        "structure has_property property"
+      ],
+      "allowedSourceTypes": [
+        "structure"
+      ],
+      "allowedTargetTypes": [
+        "property"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "supports",
+      "name": "supports",
+      "category": "structure",
+      "description": "A structure supports an approach.",
+      "argumentPattern": "structure -> approach",
+      "examples": [
+        "structure supports approach"
+      ],
+      "allowedSourceTypes": [
+        "structure"
+      ],
+      "allowedTargetTypes": [
+        "approach"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "represents",
+      "name": "represents",
+      "category": "structure",
+      "description": "A structure represents an element.",
+      "argumentPattern": "structure -> element",
+      "examples": [
+        "structure represents element"
+      ],
+      "allowedSourceTypes": [
+        "structure"
+      ],
+      "allowedTargetTypes": [
+        "element"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "organizes",
+      "name": "organizes",
+      "category": "structure",
+      "description": "A structure organizes an element.",
+      "argumentPattern": "structure -> element",
+      "examples": [
+        "structure organizes element"
+      ],
+      "allowedSourceTypes": [
+        "structure"
+      ],
+      "allowedTargetTypes": [
+        "element"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "part_of",
+      "name": "part_of",
+      "category": "element",
+      "description": "An element is part of a structure.",
+      "argumentPattern": "element -> structure",
+      "examples": [
+        "element part_of structure"
+      ],
+      "allowedSourceTypes": [
+        "element"
+      ],
+      "allowedTargetTypes": [
+        "structure"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "interacts_with",
+      "name": "interacts_with",
+      "category": "element",
+      "description": "An element interacts with another element.",
+      "argumentPattern": "element -> element",
+      "examples": [
+        "element interacts_with element"
+      ],
+      "allowedSourceTypes": [
+        "element"
+      ],
+      "allowedTargetTypes": [
+        "element"
+      ],
+      "bidirectional": true
+    },
+    {
+      "id": "defines",
+      "name": "defines",
+      "category": "element",
+      "description": "An element defines a structure.",
+      "argumentPattern": "element -> structure",
+      "examples": [
+        "element defines structure"
+      ],
+      "allowedSourceTypes": [
+        "element"
+      ],
+      "allowedTargetTypes": [
+        "structure"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "restricts",
+      "name": "restricts",
+      "category": "element",
+      "description": "An element restricts another element.",
+      "argumentPattern": "element -> element",
+      "examples": [
+        "element restricts element"
+      ],
+      "allowedSourceTypes": [
+        "element"
+      ],
+      "allowedTargetTypes": [
+        "element"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "applies_to",
+      "name": "applies_to",
+      "category": "property",
+      "description": "A property applies to a structure.",
+      "argumentPattern": "property -> structure",
+      "examples": [
+        "property applies_to structure"
+      ],
+      "allowedSourceTypes": [
+        "property"
+      ],
+      "allowedTargetTypes": [
+        "structure"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "affects",
+      "name": "affects",
+      "category": "property",
+      "description": "A property affects an approach.",
+      "argumentPattern": "property -> approach",
+      "examples": [
+        "property affects approach"
+      ],
+      "allowedSourceTypes": [
+        "property"
+      ],
+      "allowedTargetTypes": [
+        "approach"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "limits",
+      "name": "limits",
+      "category": "property",
+      "description": "A property limits an approach.",
+      "argumentPattern": "property -> approach",
+      "examples": [
+        "property limits approach"
+      ],
+      "allowedSourceTypes": [
+        "property"
+      ],
+      "allowedTargetTypes": [
+        "approach"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "enables",
+      "name": "enables",
+      "category": "property",
+      "description": "A property enables an approach.",
+      "argumentPattern": "property -> approach",
+      "examples": [
+        "property enables approach"
+      ],
+      "allowedSourceTypes": [
+        "property"
+      ],
+      "allowedTargetTypes": [
+        "approach"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "motivates",
+      "name": "motivates",
+      "category": "knowledge_reasoning",
+      "description": "An element motivates another element.",
+      "argumentPattern": "element -> element",
+      "examples": [
+        "element motivates element"
+      ],
+      "allowedSourceTypes": [
+        "element"
+      ],
+      "allowedTargetTypes": [
+        "element"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "requires",
+      "name": "requires",
+      "category": "knowledge_reasoning",
+      "description": "A structure requires an element.",
+      "argumentPattern": "structure -> element",
+      "examples": [
+        "structure requires element"
+      ],
+      "allowedSourceTypes": [
+        "structure"
+      ],
+      "allowedTargetTypes": [
+        "element"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "depends_on",
+      "name": "depends_on",
+      "category": "knowledge_reasoning",
+      "description": "An element depends on another element.",
+      "argumentPattern": "element -> element",
+      "examples": [
+        "element depends_on element"
+      ],
+      "allowedSourceTypes": [
+        "element"
+      ],
+      "allowedTargetTypes": [
+        "element"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "instantiates",
+      "name": "instantiates",
+      "category": "knowledge_reasoning",
+      "description": "An element instantiates another element.",
+      "argumentPattern": "element -> element",
+      "examples": [
+        "element instantiates element"
+      ],
+      "allowedSourceTypes": [
+        "element"
+      ],
+      "allowedTargetTypes": [
+        "element"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "is_a",
+      "name": "is_a",
+      "category": "same_type",
+      "description": "A concept is a subtype or instance of another concept.",
+      "argumentPattern": "concept -> concept",
+      "examples": [
+        "concept is_a concept"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "contrasts_with",
+      "name": "contrasts_with",
+      "category": "same_type",
+      "description": "A concept contrasts with another concept.",
+      "argumentPattern": "concept -> concept",
+      "examples": [
+        "concept contrasts_with concept"
+      ],
+      "bidirectional": true
+    },
+    {
+      "id": "extends",
+      "name": "extends",
+      "category": "same_type",
+      "description": "A concept extends another concept.",
+      "argumentPattern": "concept -> concept",
+      "examples": [
+        "concept extends concept"
+      ],
+      "bidirectional": false
+    },
+    {
+      "id": "related_to",
+      "name": "related_to",
+      "category": "same_type",
+      "description": "A concept is broadly related to another concept.",
+      "argumentPattern": "concept -> concept",
+      "examples": [
+        "concept related_to concept"
+      ],
+      "bidirectional": true
+    }
+  ],
+  "nodeCandidates": [
+    {
+      "id": "node-candidate-0001",
+      "name": "A conventional TV",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0037"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0002",
+      "name": "agents",
+      "type": "element",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0010",
+        "chunk-0011",
+        "chunk-0012"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 3 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0003",
+      "name": "AI ideas",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0006"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0004",
+      "name": "AI ideas differ",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0021"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0005",
+      "name": "AI systems",
+      "type": "structure",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0001",
+        "chunk-0011",
+        "chunk-0013"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 3 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0006",
+      "name": "AI systems and",
+      "type": "structure",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0001",
+        "chunk-0011",
+        "chunk-0013"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 3 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0007",
+      "name": "Assigning credit is",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0019"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0008",
+      "name": "assumptions about information units",
+      "type": "element",
+      "abstractionDepth": 2,
+      "sourceChunkIds": [
+        "chunk-0003"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0009",
+      "name": "Before diving into",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0005"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0010",
+      "name": "Bell Labs",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0024"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0011",
+      "name": "bit strings",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0030"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0012",
+      "name": "bits",
+      "type": "element",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0025",
+        "chunk-0026",
+        "chunk-0027",
+        "chunk-0031",
+        "chunk-0033",
+        "chunk-0044",
+        "chunk-0045",
+        "chunk-0046"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 8 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0013",
+      "name": "Bits are linked",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0027"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0014",
+      "name": "Challenges of assigning",
+      "type": "problem",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0020"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0015",
+      "name": "channel capacity",
+      "type": "structure",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0032",
+        "chunk-0036",
+        "chunk-0038",
+        "chunk-0044"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 4 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0016",
+      "name": "communication systems",
+      "type": "structure",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0011",
+        "chunk-0014"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 2 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0017",
+      "name": "Complexity",
+      "type": "problem",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0042"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0018",
+      "name": "credit assignment",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0006",
+        "chunk-0017",
+        "chunk-0018",
+        "chunk-0032"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 4 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0019",
+      "name": "Credit assignment as",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0032"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0020",
+      "name": "Credit assignment challenge",
+      "type": "problem",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0032"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0021",
+      "name": "entropy",
+      "type": "element",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0028",
+        "chunk-0031",
+        "chunk-0033"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 3 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0022",
+      "name": "Entropy depends on",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0031"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0023",
+      "name": "Establishing some shared",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0004"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0024",
+      "name": "feedback",
+      "type": "element",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0001",
+        "chunk-0002",
+        "chunk-0016"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 3 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0025",
+      "name": "Feedback depends on",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0016"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0026",
+      "name": "Fiber optic network",
+      "type": "structure",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0040"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0027",
+      "name": "Framing credit assignment",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0017"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0028",
+      "name": "He developed his",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0024"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0029",
+      "name": "Herbert Simon described",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0042"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0030",
+      "name": "how they conceive capacity",
+      "type": "property",
+      "abstractionDepth": 2,
+      "sourceChunkIds": [
+        "chunk-0021"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0031",
+      "name": "information",
+      "type": "element",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0002",
+        "chunk-0003",
+        "chunk-0005",
+        "chunk-0007",
+        "chunk-0009",
+        "chunk-0010",
+        "chunk-0011",
+        "chunk-0012",
+        "chunk-0014",
+        "chunk-0016",
+        "chunk-0018",
+        "chunk-0019",
+        "chunk-0021",
+        "chunk-0022",
+        "chunk-0023",
+        "chunk-0025",
+        "chunk-0026",
+        "chunk-0034",
+        "chunk-0036",
+        "chunk-0038",
+        "chunk-0039",
+        "chunk-0041",
+        "chunk-0044",
+        "chunk-0047"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 24 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0032",
+      "name": "information processing",
+      "type": "approach",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0009",
+        "chunk-0010",
+        "chunk-0011",
+        "chunk-0014",
+        "chunk-0018",
+        "chunk-0022",
+        "chunk-0025",
+        "chunk-0026",
+        "chunk-0039",
+        "chunk-0041",
+        "chunk-0044"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 11 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0033",
+      "name": "information theory",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0023"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0034",
+      "name": "into meaningful patterns called lists",
+      "type": "property",
+      "abstractionDepth": 2,
+      "sourceChunkIds": [
+        "chunk-0045"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0035",
+      "name": "Introduction",
+      "type": "element",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0001",
+        "chunk-0002",
+        "chunk-0003",
+        "chunk-0004",
+        "chunk-0005",
+        "chunk-0006",
+        "chunk-0007",
+        "chunk-0008",
+        "chunk-0009",
+        "chunk-0010",
+        "chunk-0011",
+        "chunk-0012",
+        "chunk-0013",
+        "chunk-0014",
+        "chunk-0015",
+        "chunk-0016",
+        "chunk-0017",
+        "chunk-0018",
+        "chunk-0019",
+        "chunk-0020",
+        "chunk-0021",
+        "chunk-0022",
+        "chunk-0023",
+        "chunk-0024",
+        "chunk-0025",
+        "chunk-0026",
+        "chunk-0027",
+        "chunk-0028",
+        "chunk-0029",
+        "chunk-0030",
+        "chunk-0031",
+        "chunk-0032",
+        "chunk-0033",
+        "chunk-0034",
+        "chunk-0035",
+        "chunk-0036",
+        "chunk-0037",
+        "chunk-0038",
+        "chunk-0039",
+        "chunk-0040",
+        "chunk-0041",
+        "chunk-0042",
+        "chunk-0043",
+        "chunk-0044",
+        "chunk-0045",
+        "chunk-0046",
+        "chunk-0047",
+        "chunk-0048"
+      ],
+      "heuristics": [
+        "section_heading"
+      ],
+      "rationale": "Selected by section_heading in 48 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0036",
+      "name": "Lists differ from",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0046"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0037",
+      "name": "logic puzzles and playing chess",
+      "type": "element",
+      "abstractionDepth": 2,
+      "sourceChunkIds": [
+        "chunk-0043"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0038",
+      "name": "making organizations and simulations",
+      "type": "element",
+      "abstractionDepth": 2,
+      "sourceChunkIds": [
+        "chunk-0043"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0039",
+      "name": "message passing",
+      "type": "structure",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0013",
+        "chunk-0015",
+        "chunk-0048"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 3 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0040",
+      "name": "Message passing systems",
+      "type": "structure",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0015"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0041",
+      "name": "more capacity",
+      "type": "property",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0037",
+        "chunk-0040"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 2 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0042",
+      "name": "name designating what symbols externally",
+      "type": "element",
+      "abstractionDepth": 2,
+      "sourceChunkIds": [
+        "chunk-0046"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0043",
+      "name": "network",
+      "type": "structure",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0037"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0044",
+      "name": "otherwise trafficking information agents",
+      "type": "element",
+      "abstractionDepth": 2,
+      "sourceChunkIds": [
+        "chunk-0010"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0045",
+      "name": "Overall",
+      "type": "element",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0034"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0046",
+      "name": "physical or conceptual world",
+      "type": "element",
+      "abstractionDepth": 2,
+      "sourceChunkIds": [
+        "chunk-0046"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0047",
+      "name": "problem-solving environments",
+      "type": "problem",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0010"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0048",
+      "name": "process these patterns",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0021"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0049",
+      "name": "Reinforcement learning",
+      "type": "approach",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0048"
+      ],
+      "heuristics": [
+        "relation_argument_phrase",
+        "term_frequency"
+      ],
+      "rationale": "Selected by relation_argument_phrase, term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0050",
+      "name": "reliability",
+      "type": "element",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0038"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0051",
+      "name": "symbols",
+      "type": "element",
+      "abstractionDepth": 0,
+      "sourceChunkIds": [
+        "chunk-0015"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0052",
+      "name": "Symbols may include",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0008"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0053",
+      "name": "Syntactic capacity",
+      "type": "property",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0039"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0054",
+      "name": "syntactic processing",
+      "type": "approach",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0029",
+        "chunk-0030"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 2 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0055",
+      "name": "Telephone networks",
+      "type": "structure",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0029"
+      ],
+      "heuristics": [
+        "relation_argument_phrase"
+      ],
+      "rationale": "Selected by relation_argument_phrase in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0056",
+      "name": "These actions are",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0013"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    },
+    {
+      "id": "node-candidate-0057",
+      "name": "With this terminology",
+      "type": "element",
+      "abstractionDepth": 1,
+      "sourceChunkIds": [
+        "chunk-0018"
+      ],
+      "heuristics": [
+        "term_frequency"
+      ],
+      "rationale": "Selected by term_frequency in 1 source chunk(s)."
+    }
+  ],
+  "candidateRelations": [
+    {
+      "id": "relation-candidate-0001",
+      "relationTypeId": "uses",
+      "sourceCandidateId": "node-candidate-0006",
+      "targetCandidateId": "node-candidate-0024",
+      "evidenceSource": {
+        "chunkId": "chunk-0001",
+        "text": "In our previous session, we characterized learning in AI systems and organizations as a process of using feedback to assign credit to problem-solving actions."
+      },
+      "confidence": 0.48,
+      "extractionRationale": "Matched \"AI systems and using feedback\" in source evidence.",
+      "status": "unsupported",
+      "unsupportedReason": "Source type \"structure\" is outside allowed source types for \"uses\"."
+    },
+    {
+      "id": "relation-candidate-0002",
+      "relationTypeId": "represents",
+      "sourceCandidateId": "node-candidate-0024",
+      "targetCandidateId": "node-candidate-0031",
+      "evidenceSource": {
+        "chunkId": "chunk-0002",
+        "text": "By convention, we will from now on usually refer to feedback as \"information\"."
+      },
+      "confidence": 0.46,
+      "extractionRationale": "Matched prose pattern \"feedback refer to information\" in source evidence.",
+      "status": "unsupported",
+      "unsupportedReason": "Source type \"element\" is outside allowed source types for \"represents\"."
+    },
+    {
+      "id": "relation-candidate-0003",
+      "relationTypeId": "interacts_with",
+      "sourceCandidateId": "node-candidate-0031",
+      "targetCandidateId": "node-candidate-0047",
+      "evidenceSource": {
+        "chunkId": "chunk-0010",
+        "text": "By information processing, we will refer broadly to actions for storing, manipulating, displaying, and otherwise trafficking in information by agents interacting with problem-solving environments."
+      },
+      "confidence": 0.48,
+      "extractionRationale": "Matched \"information interacting with problem-solving environments\" in source evidence.",
+      "status": "unsupported",
+      "unsupportedReason": "Target type \"problem\" is outside allowed target types for \"interacts_with\"."
+    },
+    {
+      "id": "relation-candidate-0004",
+      "relationTypeId": "supports",
+      "sourceCandidateId": "node-candidate-0016",
+      "targetCandidateId": "node-candidate-0032",
+      "evidenceSource": {
+        "chunkId": "chunk-0014",
+        "text": "Communication systems support information processing."
+      },
+      "confidence": 0.72,
+      "extractionRationale": "Matched \"communication systems support information processing\" in source evidence.",
+      "status": "supported"
+    },
+    {
+      "id": "relation-candidate-0005",
+      "relationTypeId": "requires",
+      "sourceCandidateId": "node-candidate-0040",
+      "targetCandidateId": "node-candidate-0051",
+      "evidenceSource": {
+        "chunkId": "chunk-0015",
+        "text": "Message passing systems require symbols."
+      },
+      "confidence": 0.72,
+      "extractionRationale": "Matched \"Message passing systems require symbols\" in source evidence.",
+      "status": "supported"
+    },
+    {
+      "id": "relation-candidate-0006",
+      "relationTypeId": "depends_on",
+      "sourceCandidateId": "node-candidate-0025",
+      "targetCandidateId": "node-candidate-0031",
+      "evidenceSource": {
+        "chunkId": "chunk-0016",
+        "text": "Feedback depends on information."
+      },
+      "confidence": 0.72,
+      "extractionRationale": "Matched \"Feedback depends on depends on information\" in source evidence.",
+      "status": "supported"
+    },
+    {
+      "id": "relation-candidate-0007",
+      "relationTypeId": "is_a",
+      "sourceCandidateId": "node-candidate-0007",
+      "targetCandidateId": "node-candidate-0031",
+      "evidenceSource": {
+        "chunkId": "chunk-0019",
+        "text": "Assigning credit is an information process of evaluating patterns in symbols about problems."
+      },
+      "confidence": 0.72,
+      "extractionRationale": "Matched \"Assigning credit is is an information\" in source evidence.",
+      "status": "supported"
+    },
+    {
+      "id": "relation-candidate-0008",
+      "relationTypeId": "supports",
+      "sourceCandidateId": "node-candidate-0055",
+      "targetCandidateId": "node-candidate-0054",
+      "evidenceSource": {
+        "chunkId": "chunk-0029",
+        "text": "Telephone networks support syntactic processing."
+      },
+      "confidence": 0.72,
+      "extractionRationale": "Matched \"Telephone networks support syntactic processing\" in source evidence.",
+      "status": "supported"
+    },
+    {
+      "id": "relation-candidate-0009",
+      "relationTypeId": "uses",
+      "sourceCandidateId": "node-candidate-0054",
+      "targetCandidateId": "node-candidate-0011",
+      "evidenceSource": {
+        "chunkId": "chunk-0030",
+        "text": "Syntactic processing uses bit strings."
+      },
+      "confidence": 0.48,
+      "extractionRationale": "Matched \"syntactic processing uses bit strings\" in source evidence.",
+      "status": "unsupported",
+      "unsupportedReason": "Target type \"element\" is outside allowed target types for \"uses\"."
+    },
+    {
+      "id": "relation-candidate-0010",
+      "relationTypeId": "depends_on",
+      "sourceCandidateId": "node-candidate-0022",
+      "targetCandidateId": "node-candidate-0012",
+      "evidenceSource": {
+        "chunkId": "chunk-0031",
+        "text": "Entropy depends on bits."
+      },
+      "confidence": 0.72,
+      "extractionRationale": "Matched \"Entropy depends on depends on bits\" in source evidence.",
+      "status": "supported"
+    },
+    {
+      "id": "relation-candidate-0011",
+      "relationTypeId": "limits",
+      "sourceCandidateId": "node-candidate-0018",
+      "targetCandidateId": "node-candidate-0015",
+      "evidenceSource": {
+        "chunkId": "chunk-0032",
+        "text": "Credit assignment as a challenge of limited channel capacity"
+      },
+      "confidence": 0.48,
+      "extractionRationale": "Matched \"credit assignment limited channel capacity\" in source evidence.",
+      "status": "unsupported",
+      "unsupportedReason": "Source type \"element\" is outside allowed source types for \"limits\"."
+    },
+    {
+      "id": "relation-candidate-0012",
+      "relationTypeId": "has_property",
+      "sourceCandidateId": "node-candidate-0043",
+      "targetCandidateId": "node-candidate-0041",
+      "evidenceSource": {
+        "chunkId": "chunk-0037",
+        "text": "A conventional TV channel has access to only a limited amount of bandwidth, while fiber optic cables in a 5G network have more capacity."
+      },
+      "confidence": 0.72,
+      "extractionRationale": "Matched \"network have more capacity\" in source evidence.",
+      "status": "supported"
+    },
+    {
+      "id": "relation-candidate-0013",
+      "relationTypeId": "limits",
+      "sourceCandidateId": "node-candidate-0053",
+      "targetCandidateId": "node-candidate-0032",
+      "evidenceSource": {
+        "chunkId": "chunk-0039",
+        "text": "Syntactic capacity limits information processing."
+      },
+      "confidence": 0.72,
+      "extractionRationale": "Matched \"Syntactic capacity limits information processing\" in source evidence.",
+      "status": "supported"
+    },
+    {
+      "id": "relation-candidate-0014",
+      "relationTypeId": "has_property",
+      "sourceCandidateId": "node-candidate-0026",
+      "targetCandidateId": "node-candidate-0041",
+      "evidenceSource": {
+        "chunkId": "chunk-0040",
+        "text": "Fiber optic network has more capacity."
+      },
+      "confidence": 0.72,
+      "extractionRationale": "Matched \"Fiber optic network has more capacity\" in source evidence.",
+      "status": "supported"
+    },
+    {
+      "id": "relation-candidate-0015",
+      "relationTypeId": "organizes",
+      "sourceCandidateId": "node-candidate-0012",
+      "targetCandidateId": "node-candidate-0034",
+      "evidenceSource": {
+        "chunkId": "chunk-0045",
+        "text": "Simon proposed that bits should be organized into meaningful patterns called lists."
+      },
+      "confidence": 0.48,
+      "extractionRationale": "Matched \"bits organized into meaningful patterns called lists\" in source evidence.",
+      "status": "unsupported",
+      "unsupportedReason": "Source type \"element\" is outside allowed source types for \"organizes\"."
+    },
+    {
+      "id": "relation-candidate-0016",
+      "relationTypeId": "represents",
+      "sourceCandidateId": "node-candidate-0051",
+      "targetCandidateId": "node-candidate-0046",
+      "evidenceSource": {
+        "chunkId": "chunk-0046",
+        "text": "Lists differ from bits in that they have a name designating what the symbols externally refer to in the physical or conceptual world."
+      },
+      "confidence": 0.48,
+      "extractionRationale": "Matched \"symbols refer to physical or conceptual world\" in source evidence.",
+      "status": "unsupported",
+      "unsupportedReason": "Source type \"element\" is outside allowed source types for \"represents\"."
+    },
+    {
+      "id": "relation-candidate-0017",
+      "relationTypeId": "uses",
+      "sourceCandidateId": "node-candidate-0049",
+      "targetCandidateId": "node-candidate-0039",
+      "evidenceSource": {
+        "chunkId": "chunk-0048",
+        "text": "Reinforcement learning uses message passing."
+      },
+      "confidence": 0.72,
+      "extractionRationale": "Matched \"Reinforcement learning uses message passing\" in source evidence.",
+      "status": "supported"
+    }
+  ],
+  "verifiedRelations": [
+    {
+      "id": "verified-relation-0001",
+      "relationTypeId": "supports",
+      "sourceConceptId": "node-candidate-0016",
+      "targetConceptId": "node-candidate-0032",
+      "sourceNodeId": "node-candidate-0016",
+      "targetNodeId": "node-candidate-0032",
+      "constraintConceptIds": [],
+      "status": "verified",
+      "evidenceChunkId": "chunk-0014",
+      "evidenceText": "Communication systems support information processing.",
+      "evidenceSource": {
+        "chunkId": "chunk-0014",
+        "text": "Communication systems support information processing."
+      }
+    },
+    {
+      "id": "verified-relation-0002",
+      "relationTypeId": "requires",
+      "sourceConceptId": "node-candidate-0040",
+      "targetConceptId": "node-candidate-0051",
+      "sourceNodeId": "node-candidate-0040",
+      "targetNodeId": "node-candidate-0051",
+      "constraintConceptIds": [],
+      "status": "verified",
+      "evidenceChunkId": "chunk-0015",
+      "evidenceText": "Message passing systems require symbols.",
+      "evidenceSource": {
+        "chunkId": "chunk-0015",
+        "text": "Message passing systems require symbols."
+      }
+    },
+    {
+      "id": "verified-relation-0003",
+      "relationTypeId": "depends_on",
+      "sourceConceptId": "node-candidate-0025",
+      "targetConceptId": "node-candidate-0031",
+      "sourceNodeId": "node-candidate-0025",
+      "targetNodeId": "node-candidate-0031",
+      "constraintConceptIds": [],
+      "status": "verified",
+      "evidenceChunkId": "chunk-0016",
+      "evidenceText": "Feedback depends on information.",
+      "evidenceSource": {
+        "chunkId": "chunk-0016",
+        "text": "Feedback depends on information."
+      }
+    },
+    {
+      "id": "verified-relation-0004",
+      "relationTypeId": "is_a",
+      "sourceConceptId": "node-candidate-0007",
+      "targetConceptId": "node-candidate-0031",
+      "sourceNodeId": "node-candidate-0007",
+      "targetNodeId": "node-candidate-0031",
+      "constraintConceptIds": [],
+      "status": "verified",
+      "evidenceChunkId": "chunk-0019",
+      "evidenceText": "Assigning credit is an information process of evaluating patterns in symbols about problems.",
+      "evidenceSource": {
+        "chunkId": "chunk-0019",
+        "text": "Assigning credit is an information process of evaluating patterns in symbols about problems."
+      }
+    },
+    {
+      "id": "verified-relation-0005",
+      "relationTypeId": "supports",
+      "sourceConceptId": "node-candidate-0055",
+      "targetConceptId": "node-candidate-0054",
+      "sourceNodeId": "node-candidate-0055",
+      "targetNodeId": "node-candidate-0054",
+      "constraintConceptIds": [],
+      "status": "verified",
+      "evidenceChunkId": "chunk-0029",
+      "evidenceText": "Telephone networks support syntactic processing.",
+      "evidenceSource": {
+        "chunkId": "chunk-0029",
+        "text": "Telephone networks support syntactic processing."
+      }
+    },
+    {
+      "id": "verified-relation-0006",
+      "relationTypeId": "depends_on",
+      "sourceConceptId": "node-candidate-0022",
+      "targetConceptId": "node-candidate-0012",
+      "sourceNodeId": "node-candidate-0022",
+      "targetNodeId": "node-candidate-0012",
+      "constraintConceptIds": [],
+      "status": "verified",
+      "evidenceChunkId": "chunk-0031",
+      "evidenceText": "Entropy depends on bits.",
+      "evidenceSource": {
+        "chunkId": "chunk-0031",
+        "text": "Entropy depends on bits."
+      }
+    },
+    {
+      "id": "verified-relation-0007",
+      "relationTypeId": "has_property",
+      "sourceConceptId": "node-candidate-0043",
+      "targetConceptId": "node-candidate-0041",
+      "sourceNodeId": "node-candidate-0043",
+      "targetNodeId": "node-candidate-0041",
+      "constraintConceptIds": [],
+      "status": "verified",
+      "evidenceChunkId": "chunk-0037",
+      "evidenceText": "A conventional TV channel has access to only a limited amount of bandwidth, while fiber optic cables in a 5G network have more capacity.",
+      "evidenceSource": {
+        "chunkId": "chunk-0037",
+        "text": "A conventional TV channel has access to only a limited amount of bandwidth, while fiber optic cables in a 5G network have more capacity."
+      }
+    },
+    {
+      "id": "verified-relation-0008",
+      "relationTypeId": "limits",
+      "sourceConceptId": "node-candidate-0053",
+      "targetConceptId": "node-candidate-0032",
+      "sourceNodeId": "node-candidate-0053",
+      "targetNodeId": "node-candidate-0032",
+      "constraintConceptIds": [],
+      "status": "verified",
+      "evidenceChunkId": "chunk-0039",
+      "evidenceText": "Syntactic capacity limits information processing.",
+      "evidenceSource": {
+        "chunkId": "chunk-0039",
+        "text": "Syntactic capacity limits information processing."
+      }
+    },
+    {
+      "id": "verified-relation-0009",
+      "relationTypeId": "has_property",
+      "sourceConceptId": "node-candidate-0026",
+      "targetConceptId": "node-candidate-0041",
+      "sourceNodeId": "node-candidate-0026",
+      "targetNodeId": "node-candidate-0041",
+      "constraintConceptIds": [],
+      "status": "verified",
+      "evidenceChunkId": "chunk-0040",
+      "evidenceText": "Fiber optic network has more capacity.",
+      "evidenceSource": {
+        "chunkId": "chunk-0040",
+        "text": "Fiber optic network has more capacity."
+      }
+    },
+    {
+      "id": "verified-relation-0010",
+      "relationTypeId": "uses",
+      "sourceConceptId": "node-candidate-0049",
+      "targetConceptId": "node-candidate-0039",
+      "sourceNodeId": "node-candidate-0049",
+      "targetNodeId": "node-candidate-0039",
+      "constraintConceptIds": [],
+      "status": "verified",
+      "evidenceChunkId": "chunk-0048",
+      "evidenceText": "Reinforcement learning uses message passing.",
+      "evidenceSource": {
+        "chunkId": "chunk-0048",
+        "text": "Reinforcement learning uses message passing."
+      }
+    }
+  ],
+  "benchmarkOntology": {
+    "id": "benchmark-ontology-current",
+    "nodes": [
+      {
+        "id": "node-candidate-0007",
+        "name": "Assigning credit is",
+        "type": "element",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0019"
+        ]
+      },
+      {
+        "id": "node-candidate-0012",
+        "name": "bits",
+        "type": "element",
+        "abstractionDepth": 0,
+        "sourceChunkIds": [
+          "chunk-0025",
+          "chunk-0026",
+          "chunk-0027",
+          "chunk-0031",
+          "chunk-0033",
+          "chunk-0044",
+          "chunk-0045",
+          "chunk-0046"
+        ]
+      },
+      {
+        "id": "node-candidate-0016",
+        "name": "communication systems",
+        "type": "structure",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0011",
+          "chunk-0014"
+        ]
+      },
+      {
+        "id": "node-candidate-0022",
+        "name": "Entropy depends on",
+        "type": "element",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0031"
+        ]
+      },
+      {
+        "id": "node-candidate-0025",
+        "name": "Feedback depends on",
+        "type": "element",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0016"
+        ]
+      },
+      {
+        "id": "node-candidate-0026",
+        "name": "Fiber optic network",
+        "type": "structure",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0040"
+        ]
+      },
+      {
+        "id": "node-candidate-0031",
+        "name": "information",
+        "type": "element",
+        "abstractionDepth": 0,
+        "sourceChunkIds": [
+          "chunk-0002",
+          "chunk-0003",
+          "chunk-0005",
+          "chunk-0007",
+          "chunk-0009",
+          "chunk-0010",
+          "chunk-0011",
+          "chunk-0012",
+          "chunk-0014",
+          "chunk-0016",
+          "chunk-0018",
+          "chunk-0019",
+          "chunk-0021",
+          "chunk-0022",
+          "chunk-0023",
+          "chunk-0025",
+          "chunk-0026",
+          "chunk-0034",
+          "chunk-0036",
+          "chunk-0038",
+          "chunk-0039",
+          "chunk-0041",
+          "chunk-0044",
+          "chunk-0047"
+        ]
+      },
+      {
+        "id": "node-candidate-0032",
+        "name": "information processing",
+        "type": "approach",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0009",
+          "chunk-0010",
+          "chunk-0011",
+          "chunk-0014",
+          "chunk-0018",
+          "chunk-0022",
+          "chunk-0025",
+          "chunk-0026",
+          "chunk-0039",
+          "chunk-0041",
+          "chunk-0044"
+        ]
+      },
+      {
+        "id": "node-candidate-0039",
+        "name": "message passing",
+        "type": "structure",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0013",
+          "chunk-0015",
+          "chunk-0048"
+        ]
+      },
+      {
+        "id": "node-candidate-0040",
+        "name": "Message passing systems",
+        "type": "structure",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0015"
+        ]
+      },
+      {
+        "id": "node-candidate-0041",
+        "name": "more capacity",
+        "type": "property",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0037",
+          "chunk-0040"
+        ]
+      },
+      {
+        "id": "node-candidate-0043",
+        "name": "network",
+        "type": "structure",
+        "abstractionDepth": 0,
+        "sourceChunkIds": [
+          "chunk-0037"
+        ]
+      },
+      {
+        "id": "node-candidate-0049",
+        "name": "Reinforcement learning",
+        "type": "approach",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0048"
+        ]
+      },
+      {
+        "id": "node-candidate-0051",
+        "name": "symbols",
+        "type": "element",
+        "abstractionDepth": 0,
+        "sourceChunkIds": [
+          "chunk-0015"
+        ]
+      },
+      {
+        "id": "node-candidate-0053",
+        "name": "Syntactic capacity",
+        "type": "property",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0039"
+        ]
+      },
+      {
+        "id": "node-candidate-0054",
+        "name": "syntactic processing",
+        "type": "approach",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0029",
+          "chunk-0030"
+        ]
+      },
+      {
+        "id": "node-candidate-0055",
+        "name": "Telephone networks",
+        "type": "structure",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0029"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "id": "verified-relation-0001",
+        "relationTypeId": "supports",
+        "sourceConceptId": "node-candidate-0016",
+        "targetConceptId": "node-candidate-0032",
+        "sourceNodeId": "node-candidate-0016",
+        "targetNodeId": "node-candidate-0032",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0014",
+        "evidenceText": "Communication systems support information processing.",
+        "evidenceSource": {
+          "chunkId": "chunk-0014",
+          "text": "Communication systems support information processing."
+        }
+      },
+      {
+        "id": "verified-relation-0002",
+        "relationTypeId": "requires",
+        "sourceConceptId": "node-candidate-0040",
+        "targetConceptId": "node-candidate-0051",
+        "sourceNodeId": "node-candidate-0040",
+        "targetNodeId": "node-candidate-0051",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0015",
+        "evidenceText": "Message passing systems require symbols.",
+        "evidenceSource": {
+          "chunkId": "chunk-0015",
+          "text": "Message passing systems require symbols."
+        }
+      },
+      {
+        "id": "verified-relation-0003",
+        "relationTypeId": "depends_on",
+        "sourceConceptId": "node-candidate-0025",
+        "targetConceptId": "node-candidate-0031",
+        "sourceNodeId": "node-candidate-0025",
+        "targetNodeId": "node-candidate-0031",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0016",
+        "evidenceText": "Feedback depends on information.",
+        "evidenceSource": {
+          "chunkId": "chunk-0016",
+          "text": "Feedback depends on information."
+        }
+      },
+      {
+        "id": "verified-relation-0004",
+        "relationTypeId": "is_a",
+        "sourceConceptId": "node-candidate-0007",
+        "targetConceptId": "node-candidate-0031",
+        "sourceNodeId": "node-candidate-0007",
+        "targetNodeId": "node-candidate-0031",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0019",
+        "evidenceText": "Assigning credit is an information process of evaluating patterns in symbols about problems.",
+        "evidenceSource": {
+          "chunkId": "chunk-0019",
+          "text": "Assigning credit is an information process of evaluating patterns in symbols about problems."
+        }
+      },
+      {
+        "id": "verified-relation-0005",
+        "relationTypeId": "supports",
+        "sourceConceptId": "node-candidate-0055",
+        "targetConceptId": "node-candidate-0054",
+        "sourceNodeId": "node-candidate-0055",
+        "targetNodeId": "node-candidate-0054",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0029",
+        "evidenceText": "Telephone networks support syntactic processing.",
+        "evidenceSource": {
+          "chunkId": "chunk-0029",
+          "text": "Telephone networks support syntactic processing."
+        }
+      },
+      {
+        "id": "verified-relation-0006",
+        "relationTypeId": "depends_on",
+        "sourceConceptId": "node-candidate-0022",
+        "targetConceptId": "node-candidate-0012",
+        "sourceNodeId": "node-candidate-0022",
+        "targetNodeId": "node-candidate-0012",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0031",
+        "evidenceText": "Entropy depends on bits.",
+        "evidenceSource": {
+          "chunkId": "chunk-0031",
+          "text": "Entropy depends on bits."
+        }
+      },
+      {
+        "id": "verified-relation-0007",
+        "relationTypeId": "has_property",
+        "sourceConceptId": "node-candidate-0043",
+        "targetConceptId": "node-candidate-0041",
+        "sourceNodeId": "node-candidate-0043",
+        "targetNodeId": "node-candidate-0041",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0037",
+        "evidenceText": "A conventional TV channel has access to only a limited amount of bandwidth, while fiber optic cables in a 5G network have more capacity.",
+        "evidenceSource": {
+          "chunkId": "chunk-0037",
+          "text": "A conventional TV channel has access to only a limited amount of bandwidth, while fiber optic cables in a 5G network have more capacity."
+        }
+      },
+      {
+        "id": "verified-relation-0008",
+        "relationTypeId": "limits",
+        "sourceConceptId": "node-candidate-0053",
+        "targetConceptId": "node-candidate-0032",
+        "sourceNodeId": "node-candidate-0053",
+        "targetNodeId": "node-candidate-0032",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0039",
+        "evidenceText": "Syntactic capacity limits information processing.",
+        "evidenceSource": {
+          "chunkId": "chunk-0039",
+          "text": "Syntactic capacity limits information processing."
+        }
+      },
+      {
+        "id": "verified-relation-0009",
+        "relationTypeId": "has_property",
+        "sourceConceptId": "node-candidate-0026",
+        "targetConceptId": "node-candidate-0041",
+        "sourceNodeId": "node-candidate-0026",
+        "targetNodeId": "node-candidate-0041",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0040",
+        "evidenceText": "Fiber optic network has more capacity.",
+        "evidenceSource": {
+          "chunkId": "chunk-0040",
+          "text": "Fiber optic network has more capacity."
+        }
+      },
+      {
+        "id": "verified-relation-0010",
+        "relationTypeId": "uses",
+        "sourceConceptId": "node-candidate-0049",
+        "targetConceptId": "node-candidate-0039",
+        "sourceNodeId": "node-candidate-0049",
+        "targetNodeId": "node-candidate-0039",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0048",
+        "evidenceText": "Reinforcement learning uses message passing.",
+        "evidenceSource": {
+          "chunkId": "chunk-0048",
+          "text": "Reinforcement learning uses message passing."
+        }
+      }
+    ],
+    "summary": {
+      "nodeCount": 17,
+      "verifiedRelationCount": 10,
+      "evidenceChunkCount": 10
+    }
+  },
+  "learnerFacingOntology": {
+    "id": "learner-facing-ontology-current",
+    "nodes": [
+      {
+        "id": "node-candidate-0007",
+        "name": "Assigning credit is",
+        "type": "element",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0019"
+        ]
+      },
+      {
+        "id": "node-candidate-0012",
+        "name": "bits",
+        "type": "element",
+        "abstractionDepth": 0,
+        "sourceChunkIds": [
+          "chunk-0025",
+          "chunk-0026",
+          "chunk-0027",
+          "chunk-0031",
+          "chunk-0033",
+          "chunk-0044",
+          "chunk-0045",
+          "chunk-0046"
+        ]
+      },
+      {
+        "id": "node-candidate-0016",
+        "name": "communication systems",
+        "type": "structure",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0011",
+          "chunk-0014"
+        ]
+      },
+      {
+        "id": "node-candidate-0022",
+        "name": "Entropy depends on",
+        "type": "element",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0031"
+        ]
+      },
+      {
+        "id": "node-candidate-0025",
+        "name": "Feedback depends on",
+        "type": "element",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0016"
+        ]
+      },
+      {
+        "id": "node-candidate-0026",
+        "name": "Fiber optic network",
+        "type": "structure",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0040"
+        ]
+      },
+      {
+        "id": "node-candidate-0031",
+        "name": "information",
+        "type": "element",
+        "abstractionDepth": 0,
+        "sourceChunkIds": [
+          "chunk-0002",
+          "chunk-0003",
+          "chunk-0005",
+          "chunk-0007",
+          "chunk-0009",
+          "chunk-0010",
+          "chunk-0011",
+          "chunk-0012",
+          "chunk-0014",
+          "chunk-0016",
+          "chunk-0018",
+          "chunk-0019",
+          "chunk-0021",
+          "chunk-0022",
+          "chunk-0023",
+          "chunk-0025",
+          "chunk-0026",
+          "chunk-0034",
+          "chunk-0036",
+          "chunk-0038",
+          "chunk-0039",
+          "chunk-0041",
+          "chunk-0044",
+          "chunk-0047"
+        ]
+      },
+      {
+        "id": "node-candidate-0032",
+        "name": "information processing",
+        "type": "approach",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0009",
+          "chunk-0010",
+          "chunk-0011",
+          "chunk-0014",
+          "chunk-0018",
+          "chunk-0022",
+          "chunk-0025",
+          "chunk-0026",
+          "chunk-0039",
+          "chunk-0041",
+          "chunk-0044"
+        ]
+      },
+      {
+        "id": "node-candidate-0039",
+        "name": "message passing",
+        "type": "structure",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0013",
+          "chunk-0015",
+          "chunk-0048"
+        ]
+      },
+      {
+        "id": "node-candidate-0040",
+        "name": "Message passing systems",
+        "type": "structure",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0015"
+        ]
+      },
+      {
+        "id": "node-candidate-0041",
+        "name": "more capacity",
+        "type": "property",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0037",
+          "chunk-0040"
+        ]
+      },
+      {
+        "id": "node-candidate-0043",
+        "name": "network",
+        "type": "structure",
+        "abstractionDepth": 0,
+        "sourceChunkIds": [
+          "chunk-0037"
+        ]
+      },
+      {
+        "id": "node-candidate-0049",
+        "name": "Reinforcement learning",
+        "type": "approach",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0048"
+        ]
+      },
+      {
+        "id": "node-candidate-0051",
+        "name": "symbols",
+        "type": "element",
+        "abstractionDepth": 0,
+        "sourceChunkIds": [
+          "chunk-0015"
+        ]
+      },
+      {
+        "id": "node-candidate-0053",
+        "name": "Syntactic capacity",
+        "type": "property",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0039"
+        ]
+      },
+      {
+        "id": "node-candidate-0054",
+        "name": "syntactic processing",
+        "type": "approach",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0029",
+          "chunk-0030"
+        ]
+      },
+      {
+        "id": "node-candidate-0055",
+        "name": "Telephone networks",
+        "type": "structure",
+        "abstractionDepth": 1,
+        "sourceChunkIds": [
+          "chunk-0029"
+        ]
+      }
+    ],
+    "visibleRelations": [
+      {
+        "id": "verified-relation-0002",
+        "relationTypeId": "requires",
+        "sourceConceptId": "node-candidate-0040",
+        "targetConceptId": "node-candidate-0051",
+        "sourceNodeId": "node-candidate-0040",
+        "targetNodeId": "node-candidate-0051",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0015",
+        "evidenceText": "Message passing systems require symbols.",
+        "evidenceSource": {
+          "chunkId": "chunk-0015",
+          "text": "Message passing systems require symbols."
+        }
+      },
+      {
+        "id": "verified-relation-0003",
+        "relationTypeId": "depends_on",
+        "sourceConceptId": "node-candidate-0025",
+        "targetConceptId": "node-candidate-0031",
+        "sourceNodeId": "node-candidate-0025",
+        "targetNodeId": "node-candidate-0031",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0016",
+        "evidenceText": "Feedback depends on information.",
+        "evidenceSource": {
+          "chunkId": "chunk-0016",
+          "text": "Feedback depends on information."
+        }
+      },
+      {
+        "id": "verified-relation-0004",
+        "relationTypeId": "is_a",
+        "sourceConceptId": "node-candidate-0007",
+        "targetConceptId": "node-candidate-0031",
+        "sourceNodeId": "node-candidate-0007",
+        "targetNodeId": "node-candidate-0031",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0019",
+        "evidenceText": "Assigning credit is an information process of evaluating patterns in symbols about problems.",
+        "evidenceSource": {
+          "chunkId": "chunk-0019",
+          "text": "Assigning credit is an information process of evaluating patterns in symbols about problems."
+        }
+      },
+      {
+        "id": "verified-relation-0005",
+        "relationTypeId": "supports",
+        "sourceConceptId": "node-candidate-0055",
+        "targetConceptId": "node-candidate-0054",
+        "sourceNodeId": "node-candidate-0055",
+        "targetNodeId": "node-candidate-0054",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0029",
+        "evidenceText": "Telephone networks support syntactic processing.",
+        "evidenceSource": {
+          "chunkId": "chunk-0029",
+          "text": "Telephone networks support syntactic processing."
+        }
+      },
+      {
+        "id": "verified-relation-0006",
+        "relationTypeId": "depends_on",
+        "sourceConceptId": "node-candidate-0022",
+        "targetConceptId": "node-candidate-0012",
+        "sourceNodeId": "node-candidate-0022",
+        "targetNodeId": "node-candidate-0012",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0031",
+        "evidenceText": "Entropy depends on bits.",
+        "evidenceSource": {
+          "chunkId": "chunk-0031",
+          "text": "Entropy depends on bits."
+        }
+      },
+      {
+        "id": "verified-relation-0007",
+        "relationTypeId": "has_property",
+        "sourceConceptId": "node-candidate-0043",
+        "targetConceptId": "node-candidate-0041",
+        "sourceNodeId": "node-candidate-0043",
+        "targetNodeId": "node-candidate-0041",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0037",
+        "evidenceText": "A conventional TV channel has access to only a limited amount of bandwidth, while fiber optic cables in a 5G network have more capacity.",
+        "evidenceSource": {
+          "chunkId": "chunk-0037",
+          "text": "A conventional TV channel has access to only a limited amount of bandwidth, while fiber optic cables in a 5G network have more capacity."
+        }
+      },
+      {
+        "id": "verified-relation-0008",
+        "relationTypeId": "limits",
+        "sourceConceptId": "node-candidate-0053",
+        "targetConceptId": "node-candidate-0032",
+        "sourceNodeId": "node-candidate-0053",
+        "targetNodeId": "node-candidate-0032",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0039",
+        "evidenceText": "Syntactic capacity limits information processing.",
+        "evidenceSource": {
+          "chunkId": "chunk-0039",
+          "text": "Syntactic capacity limits information processing."
+        }
+      },
+      {
+        "id": "verified-relation-0009",
+        "relationTypeId": "has_property",
+        "sourceConceptId": "node-candidate-0026",
+        "targetConceptId": "node-candidate-0041",
+        "sourceNodeId": "node-candidate-0026",
+        "targetNodeId": "node-candidate-0041",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0040",
+        "evidenceText": "Fiber optic network has more capacity.",
+        "evidenceSource": {
+          "chunkId": "chunk-0040",
+          "text": "Fiber optic network has more capacity."
+        }
+      },
+      {
+        "id": "verified-relation-0010",
+        "relationTypeId": "uses",
+        "sourceConceptId": "node-candidate-0049",
+        "targetConceptId": "node-candidate-0039",
+        "sourceNodeId": "node-candidate-0049",
+        "targetNodeId": "node-candidate-0039",
+        "constraintConceptIds": [],
+        "status": "verified",
+        "evidenceChunkId": "chunk-0048",
+        "evidenceText": "Reinforcement learning uses message passing.",
+        "evidenceSource": {
+          "chunkId": "chunk-0048",
+          "text": "Reinforcement learning uses message passing."
+        }
+      }
+    ],
+    "hiddenTasks": [
+      {
+        "id": "hidden-relation-task-0001",
+        "benchmarkRelationId": "verified-relation-0001",
+        "sourceNodeId": "node-candidate-0016",
+        "targetNodeId": "node-candidate-0032",
+        "relationTypeId": "supports",
+        "evidenceChunkId": "chunk-0014",
+        "prompt": "Restore the missing relation using the available source and target nodes.",
+        "selectionReasons": [
+          "relation_type_priority",
+          "first_verified_relation"
+        ],
+        "status": "active"
+      }
+    ],
+    "summary": {
+      "nodeCount": 17,
+      "visibleRelationCount": 9,
+      "hiddenRelationCount": 1
+    }
+  },
+  "stages": [
+    {
+      "name": "input_schema",
+      "status": "completed",
+      "startedAt": "2026-06-05T15:32:55.021Z",
+      "finishedAt": "2026-06-05T15:32:55.021Z",
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "source_chunking",
+      "status": "completed",
+      "startedAt": "2026-06-05T15:32:55.022Z",
+      "finishedAt": "2026-06-05T15:32:55.022Z",
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "relation_taxonomy_loading",
+      "status": "completed",
+      "startedAt": "2026-06-05T15:32:55.022Z",
+      "finishedAt": "2026-06-05T15:32:55.022Z",
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "node_candidate_generation",
+      "status": "completed",
+      "startedAt": "2026-06-05T15:32:55.039Z",
+      "finishedAt": "2026-06-05T15:32:55.039Z",
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "evidence_grounded_relation_extraction",
+      "status": "completed",
+      "startedAt": "2026-06-05T15:32:55.062Z",
+      "finishedAt": "2026-06-05T15:32:55.062Z",
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "evidence_verification",
+      "status": "completed",
+      "startedAt": "2026-06-05T15:32:55.063Z",
+      "finishedAt": "2026-06-05T15:32:55.063Z",
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "benchmark_ontology_generation",
+      "status": "completed",
+      "startedAt": "2026-06-05T15:32:55.063Z",
+      "finishedAt": "2026-06-05T15:32:55.063Z",
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "envisioning_task_generation",
+      "status": "completed",
+      "startedAt": "2026-06-05T15:32:55.063Z",
+      "finishedAt": "2026-06-05T15:32:55.063Z",
+      "warnings": [],
+      "errors": []
+    }
+  ],
+  "summary": {
+    "sourceTitle": "Session 2 envisioning demo (Information Processing)",
+    "chunkCount": 48,
+    "relationTypeCount": 31,
+    "nodeCandidateCount": 57,
+    "relationCandidateCount": 17,
+    "verifiedRelationCount": 10,
+    "hiddenRelationCount": 1,
+    "llmValidationEnabled": false
+  }
+}

@@ -227,12 +227,15 @@ const relationSeeds: RelationSeed[] = [
 export const defaultRelationTypes: RelationType[] = relationSeeds.map((seed) => ({
   ...seed,
   name: seed.id,
+  argumentPattern: buildArgumentPattern(seed),
+  examples: [buildExample(seed)],
   bidirectional: seed.bidirectional ?? false,
 }));
 
 export function getDefaultRelationTypes(): RelationType[] {
   return defaultRelationTypes.map((relationType) => ({
     ...relationType,
+    examples: [...relationType.examples],
     allowedSourceTypes: relationType.allowedSourceTypes
       ? [...relationType.allowedSourceTypes]
       : undefined,
@@ -240,4 +243,18 @@ export function getDefaultRelationTypes(): RelationType[] {
       ? [...relationType.allowedTargetTypes]
       : undefined,
   }));
+}
+
+function buildArgumentPattern(seed: RelationSeed): string {
+  const sourcePattern = seed.allowedSourceTypes?.join(" | ") ?? "concept";
+  const targetPattern = seed.allowedTargetTypes?.join(" | ") ?? "concept";
+
+  return `${sourcePattern} -> ${targetPattern}`;
+}
+
+function buildExample(seed: RelationSeed): string {
+  const sourceType = seed.allowedSourceTypes?.[0] ?? "concept";
+  const targetType = seed.allowedTargetTypes?.[0] ?? "concept";
+
+  return `${sourceType} ${seed.id} ${targetType}`;
 }

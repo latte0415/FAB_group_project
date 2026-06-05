@@ -22,6 +22,14 @@ Qualitative Ontology Reconstruction Learning System
 - 작동 패널: 강의 노트 입력, relation constraint 설정, 파이프라인 실행, 누락 관계 복원, validation quiz 응답을 수행하는 영역
 - 시각화 패널: 파이프라인 상태, ontology graph, hidden relation, evidence, 학습자 시도, debugging 흐름, validation 결과를 보여주는 영역
 
+### 1.5 제품 성격 (시연 범위)
+이 프로젝트의 1차 목표는 실제 학습자가 일상적으로 사용하는 production 학습 도구가 아니라, **아이디어 시연용 데모**이다.
+
+- 실제 코스노트 전체에 대한 높은 추출 품질, 긴 문서 커버리지, 다양한 문체 대응은 1차 범위에 포함하지 않는다.
+- 데모는 정해진 fixture 또는 짧은 demo course note로 end-to-end 흐름을 보여주는 것을 우선한다.
+- LLM 기반 고품질 extraction, persistence, multi-user 운영은 후속 단계로 둔다.
+- 인수 기준은 "실사용 제품 완성도"가 아니라 "발표/시연에서 핵심 아이디어를 한 페이지 안에서 설명 가능한가"에 맞춘다.
+
 ## 2. 이해관계자
 
 - 학습자: 누락된 ontology relation을 복원하고 evidence 기반 debugging을 수행한다.
@@ -242,18 +250,30 @@ LLM은 extraction wording, candidate relation proposal, quiz phrasing, debugging
 
 ## 9. MVP 정의
 
-MVP는 다음을 포함해야 한다.
+MVP는 시연 목적에 맞게 **2단계**로 나눈다.
+
+### 9.1 Phase 1 — Benchmark ontology + Envisioning (현재 시연 목표)
+다음을 포함해야 한다.
 
 - 작동 패널과 시각화 패널이 함께 있는 one-page web interface
-- Pasted course-note input
-- Editable predefined relation list
-- 실행 가능한 benchmark ontology generation pipeline
-- Evidence-backed edge를 가진 graph visualization
+- Pasted course-note input 및 demo fixture 로딩
+- 사전 정의된 relation taxonomy 기반 실행 가능한 benchmark ontology generation pipeline
+- Evidence-backed relation만 benchmark graph에 승격
 - Envisioning을 위한 relation hiding
-- Learner relation reconstruction
-- Evidence-based qualitative debugging
+- Learner relation reconstruction quiz UI
+- 틀린 제안 시 evidence 기반 feedback (정답 즉시 대체 없음)
+
+Phase 1에서는 heuristic/demo extraction으로 충분하며, 실제 워드 파일 전체 품질은 요구하지 않는다.
+
+### 9.2 Phase 2 — Debugging + Validation (후속 시연 확장)
+다음은 Phase 1 완료 후 진행한다.
+
+- Editable predefined relation list
+- Interactive graph visualization (React Flow 등)
+- Evidence-based qualitative debugging flow 고도화
 - Relation-grounded multiple-choice quiz generation
 - Qualitative result summary
+- Export 및 run persistence
 
 ## 10. 권장 페이지 구성
 
@@ -274,10 +294,16 @@ MVP는 다음을 포함해야 한다.
 
 ## 12. 인수 기준
 
-- 사용자는 course-note text를 붙여넣고 전체 pipeline을 실행할 수 있다.
+### 12.1 Phase 1 인수 기준
+- 사용자는 course-note text 또는 demo fixture를 불러와 pipeline을 실행할 수 있다.
 - 생성된 ontology는 evidence 없는 relation을 포함하지 않는다.
-- Graph는 verified relation과 hidden relation을 구분하여 표시한다.
-- 학습자는 missing relation을 제안하고 evidence-based debugging을 받을 수 있다.
+- Learner-facing graph는 visible relation과 hidden relation을 구분하여 표시한다.
+- 학습자는 missing relation을 제안하고, 오답 시 evidence 기반 feedback을 받을 수 있다.
+- 정답 복원 시 hidden relation이 restored 상태로 표시된다.
+- 페이지 전환 없이 benchmark ontology 생성부터 envisioning quiz까지 시연할 수 있다.
+
+### 12.2 Phase 2 인수 기준
+- Graph는 interactive visualization으로 verified/hidden/learner-proposed relation을 구분한다.
 - Ontology relation으로부터 quiz를 생성할 수 있다.
 - Quiz 결과는 학습자가 잘못 이해한 concept relation을 식별한다.
-- 페이지 전환 없이 프로젝트 demo 전체 흐름을 보여줄 수 있다.
+- debugging, validation, export까지 포함한 전체 demo trace를 한 페이지에서 보여줄 수 있다.

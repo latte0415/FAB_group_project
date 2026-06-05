@@ -1,5 +1,5 @@
-import { PrepareWorkbench } from "@/components/benchmark-ontology/prepare-workbench";
+import { LearningWorkspace } from "@/components/layout/learning-workspace";
 
 export default function Home() {
-  return <PrepareWorkbench />;
+  return <LearningWorkspace />;
 }
