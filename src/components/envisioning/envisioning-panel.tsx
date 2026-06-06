@@ -55,7 +55,7 @@ export function createTaskAttemptStateForTask(
   return {
     sourceNodeId: task.sourceNodeId,
     targetNodeId: task.targetNodeId,
-    relationTypeId: result.relationTypes[0]?.id ?? "",
+    relationTypeId: "",
     explanation: "",
     feedback: null,
     debugGuidance: null,
@@ -80,7 +80,7 @@ export function createDefaultTaskAttemptState(
       result.learnerFacingOntology.nodes[1]?.id ??
       result.learnerFacingOntology.nodes[0]?.id ??
       "",
-    relationTypeId: result.relationTypes[0]?.id ?? "",
+    relationTypeId: "",
     explanation: "",
     feedback: null,
     debugGuidance: null,
@@ -173,6 +173,22 @@ export function EnvisioningPanel({
     createTaskAttemptStateForTask(activeTask, result);
 
   async function handleSubmitAttempt() {
+    if (!attemptState.relationTypeId) {
+      onAttemptsChange((current) => ({
+        ...current,
+        [activeTask.id]: {
+          ...attemptState,
+          feedback: {
+            hiddenTaskId: activeTask.id,
+            result: "incorrect",
+            message: "Select a relation type before submitting your proposal.",
+            mismatches: [],
+          },
+        },
+      }));
+      return;
+    }
+
     const evidenceChunk = sourceChunks.find(
       (chunk) => chunk.id === activeTask.evidenceChunkId,
     );
@@ -356,7 +372,12 @@ export function EnvisioningPanel({
       {showOverview ? (
       <div className="envisioning-section-block">
         <div className="panel-heading">
-          <h3>Learner-facing graph</h3>
+          <div>
+            <h3>Learner-facing graph</h3>
+            <p>
+              The benchmark graph with selected relations hidden for reconstruction.
+            </p>
+          </div>
           <strong>
             {learnerFacingOntology.summary.visibleRelationCount} visible ·{" "}
             {learnerFacingOntology.summary.hiddenRelationCount} hidden
@@ -425,7 +446,12 @@ export function EnvisioningPanel({
       {showRestore ? (
       <div className="envisioning-section-block envisioning-quiz-panel">
         <div className="panel-heading">
-          <h3>Envisioning restoration</h3>
+          <div>
+            <h3>Envisioning restoration</h3>
+            <p>
+              Hidden relation tasks answered from visible graph structure and evidence.
+            </p>
+          </div>
           <strong>
             {activeTaskIndex + 1} / {tasksForRestore.length}
           </strong>
@@ -441,12 +467,9 @@ export function EnvisioningPanel({
             {tasksForRestore.map((task, index) => {
               const taskState = attemptsByTaskId[task.id];
               const isCompleted = isRestoreTaskInteractionComplete(task, taskState);
-              const edgeQuizIndex = tasksForRestore
-                .slice(0, index + 1)
-                .filter(isEdgeQuizRestoreTask).length;
-              const label = isEdgeQuizRestoreTask(task)
-                ? `Edge ${edgeQuizIndex}`
-                : "Hidden edge";
+              const sourceName = resolveNodeLabel(task.sourceNodeId);
+              const targetName = resolveNodeLabel(task.targetNodeId);
+              const label = `${index + 1}. ${sourceName} -> ${targetName}`;
 
               return (
                 <button
@@ -455,6 +478,7 @@ export function EnvisioningPanel({
                   } ${isCompleted ? "completed" : ""}`}
                   key={task.id}
                   onClick={() => onActiveTaskIndexChange(index)}
+                  title={`${sourceName} -> ??? -> ${targetName}`}
                   type="button"
                 >
                   {label}
@@ -503,6 +527,9 @@ export function EnvisioningPanel({
                 updateAttemptState({ relationTypeId: event.target.value, feedback: null })
               }
             >
+              <option disabled value="">
+                Select relation type
+              </option>
               {relationTypes.map((relationType) => (
                 <option key={relationType.id} value={relationType.id}>
                   {relationType.name}
@@ -531,7 +558,8 @@ export function EnvisioningPanel({
           <label>
             Explanation (optional)
             <textarea
-              rows={3}
+              className="envisioning-explanation-input"
+              rows={2}
               value={attemptState.explanation}
               onChange={(event) =>
                 updateAttemptState({ explanation: event.target.value, feedback: null })
@@ -542,7 +570,11 @@ export function EnvisioningPanel({
 
         <button
           className="primary-action"
-          disabled={attemptState.isSubmitting || attemptState.isRestored}
+          disabled={
+            attemptState.isSubmitting ||
+            attemptState.isRestored ||
+            !attemptState.relationTypeId
+          }
           onClick={handleSubmitAttempt}
           type="button"
         >
@@ -605,20 +637,33 @@ export function EnvisioningPanel({
               </div>
             ) : null}
             {attemptState.feedback.result === "incorrect" ? (
-              <button
-                className="secondary-action"
-                disabled={attemptState.isLoadingDebug}
-                onClick={handleGenerateDebugGuidance}
-                type="button"
-              >
-                {attemptState.isLoadingDebug
-                  ? "Generating guidance…"
-                  : "Get debugging guidance"}
-              </button>
+              <>
+                <p className="callout-info">
+                  Debugging guidance does not reveal the benchmark answer. It
+                  points back to the evidence sentence so you can check the
+                  relation wording, relation type, and source-to-target direction
+                  before trying again.
+                </p>
+                <button
+                  className="secondary-action"
+                  disabled={attemptState.isLoadingDebug}
+                  onClick={handleGenerateDebugGuidance}
+                  type="button"
+                >
+                  {attemptState.isLoadingDebug
+                    ? "Generating guidance…"
+                    : "Get debugging guidance"}
+                </button>
+              </>
             ) : null}
             {attemptState.debugGuidance ? (
               <div className="debug-guidance">
                 <p>{attemptState.debugGuidance.message}</p>
+                <p className="callout-info">
+                  Self-debugging loop: reread the source evidence, compare your
+                  proposed relation with the taxonomy, then revise the same
+                  hidden relation instead of receiving the answer immediately.
+                </p>
                 <ul className="debug-prompt-list">
                   {attemptState.debugGuidance.prompts.map((prompt) => (
                     <li key={prompt.id}>

@@ -2735,22 +2735,6 @@
         }
       },
       {
-        "id": "verified-relation-0003",
-        "relationTypeId": "depends_on",
-        "sourceConceptId": "node-candidate-0025",
-        "targetConceptId": "node-candidate-0031",
-        "sourceNodeId": "node-candidate-0025",
-        "targetNodeId": "node-candidate-0031",
-        "constraintConceptIds": [],
-        "status": "verified",
-        "evidenceChunkId": "chunk-0016",
-        "evidenceText": "Feedback depends on information.",
-        "evidenceSource": {
-          "chunkId": "chunk-0016",
-          "text": "Feedback depends on information."
-        }
-      },
-      {
         "id": "verified-relation-0004",
         "relationTypeId": "is_a",
         "sourceConceptId": "node-candidate-0007",
@@ -2764,22 +2748,6 @@
         "evidenceSource": {
           "chunkId": "chunk-0019",
           "text": "Assigning credit is an information process of evaluating patterns in symbols about problems."
-        }
-      },
-      {
-        "id": "verified-relation-0005",
-        "relationTypeId": "supports",
-        "sourceConceptId": "node-candidate-0055",
-        "targetConceptId": "node-candidate-0054",
-        "sourceNodeId": "node-candidate-0055",
-        "targetNodeId": "node-candidate-0054",
-        "constraintConceptIds": [],
-        "status": "verified",
-        "evidenceChunkId": "chunk-0029",
-        "evidenceText": "Telephone networks support syntactic processing.",
-        "evidenceSource": {
-          "chunkId": "chunk-0029",
-          "text": "Telephone networks support syntactic processing."
         }
       },
       {
@@ -2877,76 +2845,104 @@
           "first_verified_relation"
         ],
         "status": "active"
+      },
+      {
+        "id": "hidden-relation-task-0002",
+        "benchmarkRelationId": "verified-relation-0005",
+        "sourceNodeId": "node-candidate-0055",
+        "targetNodeId": "node-candidate-0054",
+        "relationTypeId": "supports",
+        "evidenceChunkId": "chunk-0029",
+        "prompt": "Restore the missing relation using the available source and target nodes.",
+        "selectionReasons": [
+          "relation_type_priority",
+          "first_verified_relation"
+        ],
+        "status": "active"
+      },
+      {
+        "id": "hidden-relation-task-0003",
+        "benchmarkRelationId": "verified-relation-0003",
+        "sourceNodeId": "node-candidate-0025",
+        "targetNodeId": "node-candidate-0031",
+        "relationTypeId": "depends_on",
+        "evidenceChunkId": "chunk-0016",
+        "prompt": "Restore the missing relation using the available source and target nodes.",
+        "selectionReasons": [
+          "relation_type_priority",
+          "first_verified_relation"
+        ],
+        "status": "active"
       }
     ],
     "summary": {
       "nodeCount": 17,
-      "visibleRelationCount": 9,
-      "hiddenRelationCount": 1
+      "visibleRelationCount": 7,
+      "hiddenRelationCount": 3
     }
   },
   "stages": [
     {
       "name": "input_schema",
       "status": "completed",
-      "startedAt": "2026-06-05T15:32:55.021Z",
-      "finishedAt": "2026-06-05T15:32:55.021Z",
+      "startedAt": "2026-06-06T17:36:07.097Z",
+      "finishedAt": "2026-06-06T17:36:07.097Z",
       "warnings": [],
       "errors": []
     },
     {
       "name": "source_chunking",
       "status": "completed",
-      "startedAt": "2026-06-05T15:32:55.022Z",
-      "finishedAt": "2026-06-05T15:32:55.022Z",
+      "startedAt": "2026-06-06T17:36:07.098Z",
+      "finishedAt": "2026-06-06T17:36:07.098Z",
       "warnings": [],
       "errors": []
     },
     {
       "name": "relation_taxonomy_loading",
       "status": "completed",
-      "startedAt": "2026-06-05T15:32:55.022Z",
-      "finishedAt": "2026-06-05T15:32:55.022Z",
+      "startedAt": "2026-06-06T17:36:07.098Z",
+      "finishedAt": "2026-06-06T17:36:07.098Z",
       "warnings": [],
       "errors": []
     },
     {
       "name": "node_candidate_generation",
       "status": "completed",
-      "startedAt": "2026-06-05T15:32:55.039Z",
-      "finishedAt": "2026-06-05T15:32:55.039Z",
+      "startedAt": "2026-06-06T17:36:07.114Z",
+      "finishedAt": "2026-06-06T17:36:07.114Z",
       "warnings": [],
       "errors": []
     },
     {
       "name": "evidence_grounded_relation_extraction",
       "status": "completed",
-      "startedAt": "2026-06-05T15:32:55.062Z",
-      "finishedAt": "2026-06-05T15:32:55.062Z",
+      "startedAt": "2026-06-06T17:36:07.137Z",
+      "finishedAt": "2026-06-06T17:36:07.137Z",
       "warnings": [],
       "errors": []
     },
     {
       "name": "evidence_verification",
       "status": "completed",
-      "startedAt": "2026-06-05T15:32:55.063Z",
-      "finishedAt": "2026-06-05T15:32:55.063Z",
+      "startedAt": "2026-06-06T17:36:07.137Z",
+      "finishedAt": "2026-06-06T17:36:07.137Z",
       "warnings": [],
       "errors": []
     },
     {
       "name": "benchmark_ontology_generation",
       "status": "completed",
-      "startedAt": "2026-06-05T15:32:55.063Z",
-      "finishedAt": "2026-06-05T15:32:55.063Z",
+      "startedAt": "2026-06-06T17:36:07.137Z",
+      "finishedAt": "2026-06-06T17:36:07.137Z",
       "warnings": [],
       "errors": []
     },
     {
       "name": "envisioning_task_generation",
       "status": "completed",
-      "startedAt": "2026-06-05T15:32:55.063Z",
-      "finishedAt": "2026-06-05T15:32:55.063Z",
+      "startedAt": "2026-06-06T17:36:07.138Z",
+      "finishedAt": "2026-06-06T17:36:07.138Z",
       "warnings": [],
       "errors": []
     }
@@ -2958,7 +2954,7 @@
     "nodeCandidateCount": 57,
     "relationCandidateCount": 17,
     "verifiedRelationCount": 10,
-    "hiddenRelationCount": 1,
+    "hiddenRelationCount": 3,
     "llmValidationEnabled": false
   }
 }

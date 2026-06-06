@@ -88,6 +88,19 @@ Qualitative Ontology Reconstruction Learning System
 - 시스템은 학습자가 어떤 relation 또는 concept dependency를 잘못 이해했는지 찾도록 도와야 한다.
 - 학습자는 relation을 재구성하거나 reveal을 선택할 때까지 반복적으로 수정할 수 있어야 한다.
 
+#### 4.7.1 Get debugging guidance 동작 원칙
+- `Get debugging guidance`는 오답 attempt에 대해서만 실행된다. 정답 attempt에는 debugging guidance를 생성하지 않는다.
+- Guidance는 benchmark relation의 정답을 노출하는 기능이 아니라, 학습자가 source evidence를 다시 읽고 자신의 relation proposal을 스스로 수정하도록 유도하는 scaffold이다.
+- Guidance는 항상 hidden task, learner attempt result, benchmark relation, evidence chunk를 입력으로 받아 생성되어야 한다.
+- Guidance는 source sentence 또는 chunk text를 함께 제공하되, relation의 정답 source node, target node, relation type을 직접 reveal하지 않는다.
+- Guidance prompt는 최소한 다음 self-debugging 관점을 포함해야 한다.
+  - evidence sentence 안에서 source concept과 target concept이 어떤 표현으로 연결되는지 확인한다.
+  - evidence의 동사, causal wording, membership wording, dependency wording 등이 predefined relation taxonomy 중 어떤 relation type에 가까운지 비교한다.
+  - 학습자가 제안한 source node와 target node의 방향이 evidence의 흐름과 맞는지 점검한다.
+- Guidance response는 `revealAnswer: false`를 유지해야 하며, UI는 이를 정답 공개 상태처럼 처리해서는 안 된다.
+- 학습자는 guidance를 읽은 뒤 같은 hidden task에 대해 relation proposal을 다시 제출할 수 있어야 한다.
+- Debugging guidance의 목적은 "정답 전달"이 아니라 "evidence-grounded self-debugging loop"를 만드는 것이다.
+
 ### 4.8 First-Principle Validation
 - 시스템은 verified ontology relation을 기반으로 quiz question을 생성해야 한다.
 - 정답 선지는 검증된 relation에서만 함의되어야 한다.

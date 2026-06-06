@@ -5,6 +5,8 @@ import {
   type TaskAttemptState,
 } from "@/components/envisioning/envisioning-panel";
 import { DiagnosisPanel } from "@/components/validation/diagnosis-panel";
+import { QuizGeneratePanel } from "@/components/validation/quiz-generate-panel";
+import { QuizTakePanel } from "@/components/validation/quiz-take-panel";
 import type { ValidationSessionState } from "@/components/validation/validation-session";
 import type { HiddenRelationTask } from "@/schemas/benchmark-ontology";
 import type { PipelineSession } from "@/lib/pipeline/pipeline-session";
@@ -13,6 +15,7 @@ import type { LearnerAttemptResult } from "@/schemas/learner-attempt";
 
 type StepDetailPanelProps = {
   activeStep: number;
+  activeStepId: string;
   session: PipelineSession;
   title: string;
   text: string;
@@ -46,6 +49,7 @@ type StepDetailPanelProps = {
 
 export function StepDetailPanel({
   activeStep,
+  activeStepId,
   session,
   title,
   text,
@@ -88,6 +92,36 @@ export function StepDetailPanel({
   if (activeStep === 0) {
     return (
       <div className="detail-content">
+        <ul className="project-overview-panel">
+          <li>
+            <strong>Understanding AI concepts</strong>
+            <span>
+              Defined as the state where the learner has formed first-principles
+              understanding and can perform qualitative reasoning.
+            </span>
+          </li>
+          <li>
+            <strong>Learning state transition</strong>
+            <span>
+              Initial state: the learner has not read the course note. Goal state:
+              the learner can infer concepts from the relation structure.
+            </span>
+          </li>
+          <li>
+            <strong>Project goal</strong>
+            <span>
+              Build a Qualitative Learning System that helps learners form
+              First-Principles Understanding through Ontology Reconstruction.
+            </span>
+          </li>
+        </ul>
+      </div>
+    );
+  }
+
+  if (activeStepId === "ingest") {
+    return (
+      <div className="detail-content">
         <div className="detail-actions">
           <button
             className="secondary-action"
@@ -125,39 +159,32 @@ export function StepDetailPanel({
         {session.sourceChunks.length > 0 ? (
           <>
             <div className="panel-heading">
-              <h3>Ingest results · Source chunks</h3>
+              <div>
+                <h3>Ingest results · Source chunks</h3>
+                <p>
+                  Sentence-level course note segments with stable IDs for evidence
+                  tracing.
+                </p>
+              </div>
               <strong>{session.summary.chunkCount}</strong>
             </div>
-            <div className="scroll-list compact-scroll">
-              {session.sourceChunks.map((chunk) => (
-                <article className="chunk-row" key={chunk.id}>
-                  <small>
-                    {chunk.id} · {chunk.sectionTitle ?? chunk.sectionId} · sentence{" "}
-                    {chunk.sentenceIndex}
-                  </small>
-                  <p>{chunk.text}</p>
-                </article>
-              ))}
-            </div>
-            <div className="panel-heading">
-              <h3>Relation taxonomy</h3>
-              <strong>{session.summary.relationTypeCount}</strong>
-            </div>
-            <div className="scroll-list compact-scroll">
-              {groupedRelations.map(([category, relationTypes]) => (
-                <article className="taxonomy-group" key={category}>
-                  <h3>{category}</h3>
-                  <div className="relation-chip-list">
-                    {relationTypes.map((relationType) => (
-                      <span className="relation-chip" key={relationType.id}>
-                        {relationType.name}
-                        <small>{relationType.argumentPattern}</small>
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
+            <details className="collapsible-section">
+              <summary>
+                <span>Show source chunks</span>
+                <small>{session.summary.chunkCount} chunks</small>
+              </summary>
+              <div className="scroll-list compact-scroll">
+                {session.sourceChunks.map((chunk) => (
+                  <article className="chunk-row" key={chunk.id}>
+                    <small>
+                      {chunk.id} · {chunk.sectionTitle ?? chunk.sectionId} · sentence{" "}
+                      {chunk.sentenceIndex}
+                    </small>
+                    <p>{chunk.text}</p>
+                  </article>
+                ))}
+              </div>
+            </details>
           </>
         ) : (
           <p className="empty">Enter a course note, then run the Ingest stage.</p>
@@ -166,11 +193,17 @@ export function StepDetailPanel({
     );
   }
 
-  if (activeStep === 1) {
+  if (activeStepId === "nodes") {
     return (
       <div className="detail-content">
         <div className="panel-heading">
-          <h3>Node candidates</h3>
+          <div>
+            <h3>Node candidates</h3>
+            <p>
+              Concepts extracted from source chunks before they are promoted into graph
+              nodes.
+            </p>
+          </div>
           <strong>{session.summary.nodeCandidateCount}</strong>
         </div>
         <div className="scroll-list">
@@ -191,11 +224,52 @@ export function StepDetailPanel({
     );
   }
 
-  if (activeStep === 2) {
+  if (activeStepId === "relation-taxonomy") {
     return (
       <div className="detail-content">
         <div className="panel-heading">
-          <h3>Relation candidates</h3>
+          <div>
+            <h3>Relation taxonomy</h3>
+            <p>
+              The allowed relation type catalog used to constrain extraction and
+              validation.
+            </p>
+          </div>
+          <strong>{session.summary.relationTypeCount}</strong>
+        </div>
+        <p className="validation-hint">
+          Relation extraction can only choose from these predefined types. Unsupported
+          or weakly evidenced links should remain outside the benchmark graph.
+        </p>
+        <div className="scroll-list compact-scroll">
+          {groupedRelations.map(([category, relationTypes]) => (
+            <article className="taxonomy-group" key={category}>
+              <h3>{category}</h3>
+              <div className="relation-chip-list">
+                {relationTypes.map((relationType) => (
+                  <span className="relation-chip" key={relationType.id}>
+                    {relationType.name}
+                    <small>{relationType.argumentPattern}</small>
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (activeStepId === "relations") {
+    return (
+      <div className="detail-content">
+        <div className="panel-heading">
+          <div>
+            <h3>Relation candidates</h3>
+            <p>
+              Proposed concept-to-concept links that still need evidence verification.
+            </p>
+          </div>
           <strong>{session.summary.relationCandidateCount}</strong>
         </div>
         <div className="scroll-list">
@@ -233,11 +307,16 @@ export function StepDetailPanel({
     );
   }
 
-  if (activeStep === 3) {
+  if (activeStepId === "verify") {
     return (
       <div className="detail-content">
         <div className="panel-heading">
-          <h3>Verified relations</h3>
+          <div>
+            <h3>Verified relations</h3>
+            <p>
+              Relations accepted only after matching the source chunk and evidence text.
+            </p>
+          </div>
           <strong>{session.summary.verifiedRelationCount}</strong>
         </div>
         <div className="scroll-list">
@@ -272,11 +351,16 @@ export function StepDetailPanel({
     );
   }
 
-  if (activeStep === 4) {
+  if (activeStepId === "benchmark") {
     return (
       <div className="detail-content">
         <div className="panel-heading">
-          <h3>Benchmark ontology</h3>
+          <div>
+            <h3>Benchmark ontology</h3>
+            <p>
+              The evidence-backed answer graph used to create hidden tasks and quizzes.
+            </p>
+          </div>
           <strong>{session.benchmarkOntology?.summary.nodeCount ?? 0}</strong>
         </div>
         {session.benchmarkOntology ? (
@@ -316,7 +400,7 @@ export function StepDetailPanel({
     );
   }
 
-  if (activeStep === 5) {
+  if (activeStepId === "envisioning") {
     return prepareResponse ? (
       <EnvisioningPanel
         activeTaskIndex={activeEnvisioningTaskIndex}
@@ -342,7 +426,7 @@ export function StepDetailPanel({
     );
   }
 
-  if (activeStep === 6) {
+  if (activeStepId === "reconstruction") {
     return (
       <EnvisioningPanel
         activeTaskIndex={activeEnvisioningTaskIndex}
@@ -357,6 +441,30 @@ export function StepDetailPanel({
     );
   }
 
+  if (activeStepId === "edge-quiz-selection") {
+    return (
+      <QuizGeneratePanel
+        error={validationError}
+        onErrorChange={onValidationErrorChange}
+        onSessionChange={onValidationSessionChange}
+        result={prepareResponse}
+        session={validationSession}
+      />
+    );
+  }
+
+  if (activeStepId === "edge-quiz-debugging") {
+    return (
+      <QuizTakePanel
+        error={validationError}
+        onErrorChange={onValidationErrorChange}
+        onSessionChange={onValidationSessionChange}
+        result={prepareResponse}
+        session={validationSession}
+      />
+    );
+  }
+
   return (
     <DiagnosisPanel
       attemptResults={attemptResults}
@@ -364,6 +472,7 @@ export function StepDetailPanel({
       onErrorChange={onValidationErrorChange}
       onSessionChange={onValidationSessionChange}
       result={prepareResponse}
+      restoreTasks={restoreTasks}
       session={validationSession}
     />
   );

@@ -157,7 +157,7 @@ p {
   gap: 5px;
   flex: 1 0 104px;
   min-width: 104px;
-  min-height: 68px;
+  min-height: 82px;
   padding: 10px 12px;
   border: 0;
   border-right: 1px solid var(--line);
@@ -193,6 +193,19 @@ p {
   font-size: 12px;
   font-weight: 500;
   line-height: 1.35;
+}
+
+.pipeline-step-loop {
+  align-self: end;
+  width: fit-content;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--foreground);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .pipeline-step.completed {
@@ -292,6 +305,7 @@ p {
 .viz-card {
   display: grid;
   gap: 10px;
+  min-width: 0;
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -300,6 +314,65 @@ p {
 
 .compact-scroll {
   max-height: 180px;
+}
+
+.collapsible-section {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--background);
+}
+
+.collapsible-section summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  color: var(--foreground);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  list-style: none;
+}
+
+.collapsible-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.collapsible-section summary::before {
+  content: "+";
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.collapsible-section[open] summary::before {
+  content: "-";
+}
+
+.collapsible-section summary span {
+  flex: 1 1 auto;
+}
+
+.collapsible-section summary small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.collapsible-section .scroll-list {
+  margin: 0 12px 12px;
 }
 
 .candidate-row.unsupported {
@@ -356,6 +429,9 @@ p {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   min-height: 0;
 }
 
@@ -391,15 +467,24 @@ p {
   min-height: 320px;
   max-height: min(560px, 58vh);
   overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
   border: 1px solid var(--line);
   border-radius: 4px;
   background: var(--surface-subtle);
+}
+
+.ontology-graph-viewport.is-panning {
+  cursor: grabbing;
 }
 
 .ontology-graph-svg {
   display: block;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .graph-edge-hit {
@@ -535,6 +620,18 @@ p {
   border-bottom: 1px solid var(--line);
 }
 
+.detail-panel-header h2 {
+  margin: 0;
+}
+
+.detail-panel-header p {
+  max-width: 620px;
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .detail-step-index {
   display: block;
   margin-bottom: 4px;
@@ -548,6 +645,26 @@ p {
   display: grid;
   gap: 14px;
   min-width: 0;
+}
+
+.project-overview-panel {
+  display: grid;
+  gap: 12px;
+  max-width: 720px;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.project-overview-panel li {
+  padding-left: 4px;
+}
+
+.project-overview-panel strong,
+.project-overview-panel span {
+  display: block;
 }
 
 .detail-actions {
@@ -690,19 +807,35 @@ select:focus {
 
 .panel-heading {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
 }
 
+.panel-heading > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
 .panel-heading h3 {
+  margin: 0;
   color: var(--foreground);
   font-size: 14px;
   text-transform: none;
   letter-spacing: 0;
 }
 
+.panel-heading p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 .panel-heading strong {
+  flex: 0 0 auto;
   padding: 4px 10px;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -993,6 +1126,7 @@ select:focus {
 
 .envisioning-task-tab {
   min-height: 32px;
+  max-width: 220px;
   padding: 4px 10px;
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -1000,6 +1134,9 @@ select:focus {
   color: var(--foreground);
   font-size: 12px;
   font-weight: 500;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  text-align: left;
   cursor: pointer;
 }
 
@@ -1040,6 +1177,10 @@ select:focus {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.envisioning-explanation-input {
+  min-height: calc(2lh + 24px);
 }
 
 .envisioning-feedback {
@@ -1265,6 +1406,46 @@ select:focus {
   gap: 16px;
 }
 
+.quiz-loop-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.quiz-loop-step {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface-subtle);
+}
+
+.quiz-loop-step strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--foreground);
+  border-radius: 999px;
+  color: var(--foreground);
+  font-size: 12px;
+}
+
+.quiz-loop-step span {
+  color: var(--foreground);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.quiz-loop-step small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
 .quiz-progress-header {
   display: flex;
   align-items: center;
@@ -1275,6 +1456,56 @@ select:focus {
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+}
+
+.quiz-loop-tracker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.quiz-loop-tracker-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface-subtle);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.quiz-loop-tracker-item strong {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 11px;
+}
+
+.quiz-loop-tracker-item.correct {
+  border-color: color-mix(in srgb, var(--positive) 50%, var(--line));
+  background: var(--positive-soft);
+  color: var(--positive);
+}
+
+.quiz-loop-tracker-item.needs-debug {
+  border-color: color-mix(in srgb, var(--negative) 50%, var(--line));
+  background: var(--negative-soft);
+  color: var(--negative);
+}
+
+.quiz-loop-tracker-item.debugged {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: var(--accent-soft);
+  color: var(--foreground);
 }
 
 .quiz-progress-dots {
@@ -1337,6 +1568,21 @@ select:focus {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.edge-quiz-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.quiz-loop-mini {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: right;
 }
 
 .quiz-question-prompt {
@@ -1569,5 +1815,19 @@ select:focus {
 
   .quiz-question-prompt {
     font-size: 16px;
+  }
+
+  .quiz-loop-overview,
+  .quiz-loop-tracker {
+    grid-template-columns: 1fr;
+  }
+
+  .edge-quiz-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .quiz-loop-mini {
+    text-align: left;
   }
 }

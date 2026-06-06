@@ -3,7 +3,10 @@
 import { useMemo, useState } from "react";
 
 import type { ApiResult } from "@/schemas/api-result";
-import type { BenchmarkOntologyPrepareResponse } from "@/schemas/benchmark-ontology";
+import type {
+  BenchmarkOntologyPrepareResponse,
+  HiddenRelationTask,
+} from "@/schemas/benchmark-ontology";
 import type { GenerateDiagnosisResponse } from "@/schemas/diagnosis";
 import type { LearnerAttemptResult } from "@/schemas/learner-attempt";
 
@@ -11,6 +14,7 @@ import type { ValidationSessionState } from "@/components/validation/validation-
 
 type DiagnosisPanelProps = {
   result: BenchmarkOntologyPrepareResponse;
+  restoreTasks: HiddenRelationTask[];
   attemptResults: LearnerAttemptResult[];
   session: ValidationSessionState;
   onSessionChange: (
@@ -22,6 +26,7 @@ type DiagnosisPanelProps = {
 
 export function DiagnosisPanel({
   result,
+  restoreTasks,
   attemptResults,
   session,
   onSessionChange,
@@ -40,9 +45,26 @@ export function DiagnosisPanel({
   );
 
   const attemptMistakeCount = attemptResults.filter(
-    (attempt) => attempt.result === "incorrect",
+    (attempt) =>
+      attempt.result === "incorrect" &&
+      !restoreTasks
+        .find((task) => task.id === attempt.hiddenTaskId)
+        ?.selectionReasons.includes("edge_quiz_selection"),
+  ).length;
+  const edgeQuizMistakeCount = attemptResults.filter(
+    (attempt) =>
+      attempt.result === "incorrect" &&
+      restoreTasks
+        .find((task) => task.id === attempt.hiddenTaskId)
+        ?.selectionReasons.includes("edge_quiz_selection"),
   ).length;
   const attemptCount = attemptResults.length;
+  const quizEvaluations = session.questions
+    .map((question) => session.questionStateById[question.id]?.evaluation)
+    .filter((evaluation) => evaluation !== null);
+  const quizMistakeCount = quizEvaluations.filter(
+    (evaluation) => evaluation.result === "incorrect",
+  ).length;
 
   async function handleGenerateDiagnosis() {
     setIsGeneratingDiagnosis(true);
@@ -56,8 +78,9 @@ export function DiagnosisPanel({
         },
         body: JSON.stringify({
           benchmarkOntology,
+          restoreTasks,
           attemptResults,
-          quizEvaluations: [],
+          quizEvaluations,
         }),
       });
 
@@ -83,8 +106,8 @@ export function DiagnosisPanel({
   return (
     <div className="detail-content">
       <p className="validation-hint">
-        Synthesizes three Envisioning restoration attempts to diagnose
-        misunderstandings.
+        Synthesizes restoration and validation results into a relation-level
+        misunderstanding summary.
       </p>
 
       <dl className="summary-metrics">
@@ -93,8 +116,12 @@ export function DiagnosisPanel({
           <dd>{attemptCount}</dd>
         </div>
         <div>
-          <dt>Incorrect attempts</dt>
+          <dt>Reconstruction mistakes</dt>
           <dd>{attemptMistakeCount}</dd>
+        </div>
+        <div>
+          <dt>Edge quiz mistakes</dt>
+          <dd>{edgeQuizMistakeCount + quizMistakeCount}</dd>
         </div>
       </dl>
 
@@ -104,7 +131,7 @@ export function DiagnosisPanel({
         onClick={handleGenerateDiagnosis}
         type="button"
       >
-        {isGeneratingDiagnosis ? "Generating…" : "Generate diagnosis"}
+        {isGeneratingDiagnosis ? "Generating…" : "Generate summary"}
       </button>
 
       {diagnosis ? (
@@ -135,7 +162,7 @@ export function DiagnosisPanel({
         </article>
       ) : (
         <p className="empty">
-          Click Generate diagnosis to view the qualitative diagnosis.
+          Click Generate summary to view relation-level misunderstandings.
         </p>
       )}
 

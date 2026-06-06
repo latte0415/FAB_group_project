@@ -5,8 +5,10 @@ import { useMemo, useRef, useState } from "react";
 import { PipelinePanel } from "@/components/layout/pipeline-panel";
 import { PipelineProgressBar } from "@/components/layout/pipeline-progress-bar";
 import { StepDetailPanel } from "@/components/layout/step-detail-panel";
-import { emptyValidationSessionState } from "@/components/validation/validation-session";
-import { buildEnvisioningRestoreTasks } from "@/lib/envisioning/build-restore-tasks";
+import {
+  emptyValidationSessionState,
+  isQuizDebugPhaseComplete,
+} from "@/components/validation/validation-session";
 import { isEnvisioningRestoreComplete } from "@/lib/envisioning/envisioning-restore-progress";
 import type { TaskAttemptState } from "@/components/envisioning/envisioning-panel";
 import { EvidenceDetailPanel } from "@/components/visualization/evidence-detail-panel";
@@ -73,6 +75,28 @@ KRR uses constraints. Constraints organize concepts.
 2 Reasoning:
 Reasoning depends on representations. Constraint networks support reasoning.`;
 
+const overviewStepIndex = 0;
+const firstPipelineStepIndex = 1;
+const relationTaxonomyStepIndex = pipelineFlowSteps.findIndex(
+  (step) => step.id === "relation-taxonomy",
+);
+const envisioningStepIndex = pipelineFlowSteps.findIndex(
+  (step) => step.id === "envisioning",
+);
+const restorationStepIndex = pipelineFlowSteps.findIndex(
+  (step) => step.id === "reconstruction",
+);
+const quizSelectionStepIndex = pipelineFlowSteps.findIndex(
+  (step) => step.id === "edge-quiz-selection",
+);
+const quizDebugStepIndex = pipelineFlowSteps.findIndex(
+  (step) => step.id === "edge-quiz-debugging",
+);
+
+function toPipelineStageIndex(flowStepIndex: number) {
+  return pipelineFlowSteps[flowStepIndex]?.pipelineStageIndex ?? null;
+}
+
 function candidatesAsConcepts(candidates: NodeCandidate[]): Concept[] {
   return candidates.map((candidate) => ({
     id: candidate.id,
@@ -90,7 +114,7 @@ export function LearningWorkspace() {
   const [text, setText] = useState(sampleCourseNote);
   const [session, setSession] = useState<PipelineSession>(sessionRef.current);
   const [completedStepIndexes, setCompletedStepIndexes] = useState<Set<number>>(
-    new Set(),
+    new Set([overviewStepIndex]),
   );
   const [error, setError] = useState<string | null>(null);
   const [isRunningStep, setIsRunningStep] = useState(false);
@@ -123,14 +147,11 @@ export function LearningWorkspace() {
   const prepareResponse = useMemo(() => toPrepareResponse(session), [session]);
 
   const restoreTasks = useMemo(() => {
-    if (!prepareResponse?.learnerFacingOntology || !prepareResponse.benchmarkOntology) {
+    if (!prepareResponse?.learnerFacingOntology) {
       return [];
     }
 
-    return buildEnvisioningRestoreTasks({
-      benchmarkOntology: prepareResponse.benchmarkOntology,
-      learnerFacingOntology: prepareResponse.learnerFacingOntology,
-    });
+    return prepareResponse.learnerFacingOntology.hiddenTasks;
   }, [prepareResponse]);
 
   const relationTypeNameById = useMemo(
@@ -170,7 +191,14 @@ export function LearningWorkspace() {
   }, [attemptsByTaskId, restoreTasks]);
 
   const graphModel = useMemo((): GraphModel | null => {
-    if (session.learnerFacingOntology && activeStep >= 5) {
+    const visiblePipelineStageIndex = Math.max(
+      -1,
+      ...pipelineFlowSteps
+        .slice(0, activeStep + 1)
+        .map((step) => step.pipelineStageIndex ?? -1),
+    );
+
+    if (session.learnerFacingOntology && visiblePipelineStageIndex >= 5) {
       return buildLearnerFacingGraphModel({
         learnerFacingOntology: session.learnerFacingOntology,
         relationTypeNameById,
@@ -178,7 +206,7 @@ export function LearningWorkspace() {
       });
     }
 
-    if (session.benchmarkOntology && activeStep >= 4) {
+    if (session.benchmarkOntology && visiblePipelineStageIndex >= 4) {
       return buildBenchmarkGraphModel({
         nodes: session.benchmarkOntology.nodes,
         relations: session.benchmarkOntology.relations,
@@ -186,7 +214,7 @@ export function LearningWorkspace() {
       });
     }
 
-    if (session.verifiedRelations.length > 0 && activeStep >= 3) {
+    if (session.verifiedRelations.length > 0 && visiblePipelineStageIndex >= 3) {
       return buildBenchmarkGraphModel({
         nodes: candidatesAsConcepts(session.nodeCandidates),
         relations: session.verifiedRelations,
@@ -194,7 +222,7 @@ export function LearningWorkspace() {
       });
     }
 
-    if (session.candidateRelations.length > 0 && activeStep >= 2) {
+    if (session.candidateRelations.length > 0 && visiblePipelineStageIndex >= 2) {
       return buildCandidateGraphModel({
         nodes: candidatesAsConcepts(session.nodeCandidates),
         candidateRelations: session.candidateRelations,
@@ -216,18 +244,14 @@ export function LearningWorkspace() {
 
   const highestCompletedStep = useMemo(() => {
     if (completedStepIndexes.size === 0) {
-      return -1;
+      return overviewStepIndex;
     }
 
     return Math.max(...completedStepIndexes);
   }, [completedStepIndexes]);
 
   const maxNavigableStep = useMemo(() => {
-    if (highestCompletedStep < 0) {
-      return 0;
-    }
-
-    if (highestCompletedStep >= 5) {
+    if (highestCompletedStep >= envisioningStepIndex) {
       return pipelineFlowSteps.length - 1;
     }
 
@@ -241,27 +265,43 @@ export function LearningWorkspace() {
     activeStep < pipelineFlowSteps.length - 1 && canAdvanceFromStep(activeStep);
 
   function canAdvanceFromStep(stepIndex: number) {
+    if (stepIndex === overviewStepIndex) {
+      return true;
+    }
+
     if (pipelineFlowSteps[stepIndex].apiPath) {
       return completedStepIndexes.has(stepIndex);
     }
 
-    if (highestCompletedStep < 5) {
+    if (stepIndex === relationTaxonomyStepIndex) {
+      return completedStepIndexes.has(relationTaxonomyStepIndex - 1);
+    }
+
+    if (highestCompletedStep < envisioningStepIndex) {
       return false;
     }
 
-    if (stepIndex === 6) {
+    if (stepIndex === restorationStepIndex) {
       return isEnvisioningRestoreComplete(restoreTasks, attemptsByTaskId);
+    }
+
+    if (stepIndex === quizSelectionStepIndex) {
+      return validationSession.questions.length === 3;
+    }
+
+    if (stepIndex === quizDebugStepIndex) {
+      return isQuizDebugPhaseComplete(validationSession);
     }
 
     return false;
   }
   const isStreamingStep = isRunningStep || isRegeneratingEnvisioning;
 
-  function resetLearningSession() {
+  function resetLearningSession(nextActiveStep = overviewStepIndex) {
     const emptySession = createEmptyPipelineSession();
     sessionRef.current = emptySession;
     setSession(emptySession);
-    setCompletedStepIndexes(new Set());
+    setCompletedStepIndexes(new Set([overviewStepIndex]));
     setError(null);
     setAttemptResults([]);
     setAttemptsByTaskId({});
@@ -270,7 +310,7 @@ export function LearningWorkspace() {
     setValidationError(null);
     setSelectedEdge(null);
     setRunProgressPercent(null);
-    setActiveStep(0);
+    setActiveStep(nextActiveStep);
     demoSnapshotRef.current = null;
   }
 
@@ -284,6 +324,35 @@ export function LearningWorkspace() {
         (existing) => existing.hiddenTaskId !== attempt.hiddenTaskId,
       );
       return [...withoutCurrent, attempt];
+    });
+  }
+
+  function handleValidationSessionChange(
+    updater: (current: ValidationSessionState) => ValidationSessionState,
+  ) {
+    setValidationSession((current) => {
+      const next = updater(current);
+
+      setCompletedStepIndexes((completed) => {
+        const updated = new Set(completed);
+
+        if (next.questions.length === 3) {
+          updated.add(quizSelectionStepIndex);
+        } else {
+          updated.delete(quizSelectionStepIndex);
+          updated.delete(quizDebugStepIndex);
+        }
+
+        if (isQuizDebugPhaseComplete(next)) {
+          updated.add(quizDebugStepIndex);
+        } else {
+          updated.delete(quizDebugStepIndex);
+        }
+
+        return updated;
+      });
+
+      return next;
     });
   }
 
@@ -316,7 +385,7 @@ export function LearningWorkspace() {
       setAttemptResults([]);
       setAttemptsByTaskId({});
       setActiveEnvisioningTaskIndex(0);
-      markStepCompleted(5);
+      markStepCompleted(envisioningStepIndex);
     } catch {
       setError("Failed to regenerate envisioning tasks.");
     } finally {
@@ -356,7 +425,7 @@ export function LearningWorkspace() {
       setTitle(payload.data.title);
       setText(payload.data.text);
 
-      resetLearningSession();
+      resetLearningSession(firstPipelineStepIndex);
 
       if (source === "session" && payload.data.pipelineSnapshot) {
         demoSnapshotRef.current = payload.data.pipelineSnapshot;
@@ -370,8 +439,9 @@ export function LearningWorkspace() {
 
   async function handleRunCurrentStep() {
     const step = pipelineFlowSteps[activeStep];
+    const pipelineStageIndex = toPipelineStageIndex(activeStep);
 
-    if (!step.apiPath) {
+    if (!step.apiPath || pipelineStageIndex === null) {
       return;
     }
 
@@ -380,9 +450,9 @@ export function LearningWorkspace() {
     const requestSession = sessionRef.current;
 
     if (demoSnapshotRef.current) {
-      commitSession((current) => resetSessionFromStep(current, activeStep));
+      commitSession((current) => resetSessionFromStep(current, pipelineStageIndex));
       commitSession((current) =>
-        applyDemoSnapshotStep(current, demoSnapshotRef.current!, activeStep),
+        applyDemoSnapshotStep(current, demoSnapshotRef.current!, pipelineStageIndex),
       );
       markStepCompleted(activeStep);
       setSelectedEdge(null);
@@ -392,45 +462,45 @@ export function LearningWorkspace() {
     setIsRunningStep(true);
     setRunProgressPercent(0);
 
-    if (activeStep === 1 && requestSession.sourceChunks.length === 0) {
+    if (pipelineStageIndex === 1 && requestSession.sourceChunks.length === 0) {
       setError("Run the Ingest stage first to create source chunks.");
       setIsRunningStep(false);
       setRunProgressPercent(null);
       return;
     }
 
-    if (activeStep === 2 && requestSession.nodeCandidates.length === 0) {
+    if (pipelineStageIndex === 2 && requestSession.nodeCandidates.length === 0) {
       setError("Run the Concept extraction stage first to create node candidates.");
       setIsRunningStep(false);
       setRunProgressPercent(null);
       return;
     }
 
-    if (activeStep === 3 && requestSession.candidateRelations.length === 0) {
+    if (pipelineStageIndex === 3 && requestSession.candidateRelations.length === 0) {
       setError("Run the Relation extraction stage first to create relation candidates.");
       setIsRunningStep(false);
       setRunProgressPercent(null);
       return;
     }
 
-    if (activeStep === 4 && requestSession.verifiedRelations.length === 0) {
+    if (pipelineStageIndex === 4 && requestSession.verifiedRelations.length === 0) {
       setError("Run the Evidence verification stage first to create verified relations.");
       setIsRunningStep(false);
       setRunProgressPercent(null);
       return;
     }
 
-    if (activeStep === 5 && !requestSession.benchmarkOntology) {
+    if (pipelineStageIndex === 5 && !requestSession.benchmarkOntology) {
       setError("Run the Benchmark ontology stage first.");
       setIsRunningStep(false);
       setRunProgressPercent(null);
       return;
     }
 
-    commitSession((current) => resetSessionFromStep(current, activeStep));
+    commitSession((current) => resetSessionFromStep(current, pipelineStageIndex));
 
     try {
-      if (activeStep === 0) {
+      if (pipelineStageIndex === 0) {
         const payload = await postPipelineStage<IngestData>(
           step.apiPath,
           {
@@ -447,7 +517,7 @@ export function LearningWorkspace() {
         commitSession((current) =>
           applyIngestStage(current, payload.data.stage, payload.data.data),
         );
-      } else if (activeStep === 1) {
+      } else if (pipelineStageIndex === 1) {
         const payload = await postPipelineStage<NodesData>(
           step.apiPath,
           {
@@ -464,7 +534,7 @@ export function LearningWorkspace() {
         commitSession((current) =>
           applyNodesStage(current, payload.data.stage, payload.data.data),
         );
-      } else if (activeStep === 2) {
+      } else if (pipelineStageIndex === 2) {
         const payload = await postPipelineStage<RelationsData>(
           step.apiPath,
           {
@@ -483,7 +553,7 @@ export function LearningWorkspace() {
         commitSession((current) =>
           applyRelationsStage(current, payload.data.stage, payload.data.data),
         );
-      } else if (activeStep === 3) {
+      } else if (pipelineStageIndex === 3) {
         const payload = await postPipelineStage<VerifyData>(
           step.apiPath,
           {
@@ -502,7 +572,7 @@ export function LearningWorkspace() {
         commitSession((current) =>
           applyVerifyStage(current, payload.data.stage, payload.data.data),
         );
-      } else if (activeStep === 4) {
+      } else if (pipelineStageIndex === 4) {
         const payload = await postPipelineStage<BenchmarkData>(
           step.apiPath,
           {
@@ -520,7 +590,7 @@ export function LearningWorkspace() {
         commitSession((current) =>
           applyBenchmarkStage(current, payload.data.stage, payload.data.data),
         );
-      } else if (activeStep === 5) {
+      } else if (pipelineStageIndex === 5) {
         const payload = await postPipelineStage<EnvisioningData>(
           step.apiPath,
           {
@@ -557,6 +627,9 @@ export function LearningWorkspace() {
     }
 
     setActiveStep(index);
+    if (index === relationTaxonomyStepIndex) {
+      markStepCompleted(index);
+    }
     setSelectedEdge(null);
   }
 
@@ -588,6 +661,7 @@ export function LearningWorkspace() {
                 {String(activeStep + 1).padStart(2, "0")}
               </span>
               <h2>{activeStepMeta.label}</h2>
+              <p>{activeStepMeta.description}</p>
             </div>
             {activeStepMeta.apiPath ? (
               <span className="step-status-badge">
@@ -616,6 +690,7 @@ export function LearningWorkspace() {
             <StepDetailPanel
               activeEnvisioningTaskIndex={activeEnvisioningTaskIndex}
               activeStep={activeStep}
+              activeStepId={activeStepMeta.id}
               attemptResults={attemptResults}
               attemptsByTaskId={attemptsByTaskId}
               isLoadingCourseNote={isLoadingCourseNote}
@@ -630,7 +705,7 @@ export function LearningWorkspace() {
               onTextChange={setText}
               onTitleChange={setTitle}
               onValidationErrorChange={setValidationError}
-              onValidationSessionChange={setValidationSession}
+              onValidationSessionChange={handleValidationSessionChange}
               prepareResponse={prepareResponse}
               session={session}
               text={text}
@@ -677,7 +752,7 @@ export function LearningWorkspace() {
           <button
             className="secondary-action"
             disabled={isRunningStep}
-            onClick={resetLearningSession}
+            onClick={() => resetLearningSession()}
             type="button"
           >
             Reset

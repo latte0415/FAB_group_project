@@ -4,7 +4,7 @@ export type EnvisioningTaskConfig = {
 };
 
 export const defaultEnvisioningTaskConfig: EnvisioningTaskConfig = {
-  maxHiddenRelations: 1,
+  maxHiddenRelations: 3,
   relationTypePriority: [
     "supports",
     "depends_on",

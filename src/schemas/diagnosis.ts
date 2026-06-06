@@ -1,6 +1,9 @@
 import { z } from "zod";
 
-import { benchmarkOntologyGraphSchema } from "@/schemas/benchmark-ontology";
+import {
+  benchmarkOntologyGraphSchema,
+  hiddenRelationTaskSchema,
+} from "@/schemas/benchmark-ontology";
 import { learnerAttemptResultSchema } from "@/schemas/learner-attempt";
 import { quizAnswerEvaluationSchema } from "@/schemas/quiz";
 
@@ -22,6 +25,7 @@ export const qualitativeDiagnosisSchema = z.object({
 
 export const generateDiagnosisRequestSchema = z.object({
   benchmarkOntology: benchmarkOntologyGraphSchema,
+  restoreTasks: z.array(hiddenRelationTaskSchema).default([]),
   attemptResults: z.array(learnerAttemptResultSchema).default([]),
   quizEvaluations: z.array(quizAnswerEvaluationSchema).default([]),
 });

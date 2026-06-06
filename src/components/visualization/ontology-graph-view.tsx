@@ -24,6 +24,19 @@ const graphHeight = 520;
 const minZoom = 0.75;
 const maxZoom = 2.5;
 const zoomStep = 0.25;
+const maxPanRatio = 0.4;
+
+type PanOffset = {
+  x: number;
+  y: number;
+};
+
+type DragState = {
+  pointerId: number;
+  startClientX: number;
+  startClientY: number;
+  startPan: PanOffset;
+};
 
 const edgeStatuses = [
   "verified",
@@ -40,6 +53,8 @@ export function OntologyGraphView({
   onSelectEdge,
 }: OntologyGraphViewProps) {
   const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState<PanOffset>({ x: 0, y: 0 });
+  const [dragState, setDragState] = useState<DragState | null>(null);
 
   const positionedNodes = useMemo(() => {
     if (!graph) {
@@ -61,20 +76,76 @@ export function OntologyGraphView({
   const viewBox = useMemo(() => {
     const width = graphWidth / zoom;
     const height = graphHeight / zoom;
-    const x = (graphWidth - width) / 2;
-    const y = (graphHeight - height) / 2;
+    const x = (graphWidth - width) / 2 + pan.x;
+    const y = (graphHeight - height) / 2 + pan.y;
 
     return `${x} ${y} ${width} ${height}`;
-  }, [zoom]);
+  }, [pan.x, pan.y, zoom]);
 
   function clampZoom(value: number) {
     return Math.min(maxZoom, Math.max(minZoom, value));
   }
 
+  function clampPan(nextPan: PanOffset, nextZoom = zoom): PanOffset {
+    const visibleWidth = graphWidth / nextZoom;
+    const visibleHeight = graphHeight / nextZoom;
+    const maxX = Math.max(0, (graphWidth - visibleWidth) / 2 + graphWidth * maxPanRatio);
+    const maxY = Math.max(0, (graphHeight - visibleHeight) / 2 + graphHeight * maxPanRatio);
+
+    return {
+      x: Math.min(maxX, Math.max(-maxX, nextPan.x)),
+      y: Math.min(maxY, Math.max(-maxY, nextPan.y)),
+    };
+  }
+
+  function updateZoom(nextZoom: number) {
+    const clampedZoom = clampZoom(nextZoom);
+    setZoom(clampedZoom);
+    setPan((current) => clampPan(current, clampedZoom));
+  }
+
   function handleWheel(event: React.WheelEvent<HTMLDivElement>) {
     event.preventDefault();
     const direction = event.deltaY > 0 ? -zoomStep : zoomStep;
-    setZoom((current) => clampZoom(Number((current + direction).toFixed(2))));
+    updateZoom(Number((zoom + direction).toFixed(2)));
+  }
+
+  function handlePointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setDragState({
+      pointerId: event.pointerId,
+      startClientX: event.clientX,
+      startClientY: event.clientY,
+      startPan: pan,
+    });
+  }
+
+  function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    if (!dragState || dragState.pointerId !== event.pointerId) {
+      return;
+    }
+
+    const deltaX = (event.clientX - dragState.startClientX) / zoom;
+    const deltaY = (event.clientY - dragState.startClientY) / zoom;
+
+    setPan(
+      clampPan({
+        x: dragState.startPan.x - deltaX,
+        y: dragState.startPan.y - deltaY,
+      }),
+    );
+  }
+
+  function handlePointerUp(event: React.PointerEvent<HTMLDivElement>) {
+    if (dragState?.pointerId === event.pointerId) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+      setDragState(null);
+    }
+  }
+
+  function resetView() {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
   }
 
   if (!graph || graph.nodes.length === 0) {
@@ -105,14 +176,14 @@ export function OntologyGraphView({
             aria-label="Zoom out"
             className="secondary-action ontology-graph-zoom-button"
             disabled={zoom <= minZoom}
-            onClick={() => setZoom((current) => clampZoom(current - zoomStep))}
+            onClick={() => updateZoom(zoom - zoomStep)}
             type="button"
           >
             −
           </button>
           <button
             className="secondary-action ontology-graph-zoom-button"
-            onClick={() => setZoom(1)}
+            onClick={resetView}
             type="button"
           >
             Reset
@@ -121,7 +192,7 @@ export function OntologyGraphView({
             aria-label="Zoom in"
             className="secondary-action ontology-graph-zoom-button"
             disabled={zoom >= maxZoom}
-            onClick={() => setZoom((current) => clampZoom(current + zoomStep))}
+            onClick={() => updateZoom(zoom + zoomStep)}
             type="button"
           >
             +
@@ -140,7 +211,14 @@ export function OntologyGraphView({
         </div>
       ) : null}
 
-      <div className="ontology-graph-viewport" onWheel={handleWheel}>
+      <div
+        className={`ontology-graph-viewport ${dragState ? "is-panning" : ""}`}
+        onPointerCancel={handlePointerUp}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onWheel={handleWheel}
+      >
         <svg
           aria-label="Ontology graph"
           className="ontology-graph-svg"

@@ -12,21 +12,36 @@ export function generateDiagnosis(
   input: GenerateDiagnosisRequest,
 ): GenerateDiagnosisResponse {
   const request = generateDiagnosisRequestSchema.parse(input);
-  const attemptMistakes = request.attemptResults.filter(
-    (attempt) => attempt.result === "incorrect",
+  const restoreTaskById = new Map(
+    request.restoreTasks.map((task) => [task.id, task]),
   );
+  const attemptMistakes = request.attemptResults.filter((attempt) => {
+    const task = restoreTaskById.get(attempt.hiddenTaskId);
+    return (
+      attempt.result === "incorrect" &&
+      !task?.selectionReasons.includes("edge_quiz_selection")
+    );
+  });
+  const edgeQuizAttemptMistakes = request.attemptResults.filter((attempt) => {
+    const task = restoreTaskById.get(attempt.hiddenTaskId);
+    return (
+      attempt.result === "incorrect" &&
+      task?.selectionReasons.includes("edge_quiz_selection")
+    );
+  });
   const quizMistakes = request.quizEvaluations.filter(
     (evaluation) => evaluation.result === "incorrect",
   );
+  const quizMistakeCount = quizMistakes.length + edgeQuizAttemptMistakes.length;
   const misunderstoodRelations = collectMisunderstoodRelations(request, quizMistakes);
 
   return generateDiagnosisResponseSchema.parse({
     diagnosis: {
       id: "qualitative-diagnosis-current",
-      summary: buildSummary(attemptMistakes.length, quizMistakes.length, misunderstoodRelations),
+      summary: buildSummary(attemptMistakes.length, quizMistakeCount, misunderstoodRelations),
       misunderstoodRelations,
       attemptMistakeCount: attemptMistakes.length,
-      quizMistakeCount: quizMistakes.length,
+      quizMistakeCount,
     },
   });
 }
@@ -36,6 +51,12 @@ function collectMisunderstoodRelations(
   quizMistakes: GenerateDiagnosisRequest["quizEvaluations"],
 ): MisunderstoodRelation[] {
   const grouped = new Map<string, MisunderstoodRelation>();
+  const relationById = new Map(
+    request.benchmarkOntology.relations.map((relation) => [relation.id, relation]),
+  );
+  const restoreTaskById = new Map(
+    request.restoreTasks.map((task) => [task.id, task]),
+  );
 
   for (const mistake of quizMistakes) {
     if (!mistake.misunderstoodRelationTypeId) {
@@ -57,28 +78,54 @@ function collectMisunderstoodRelations(
       continue;
     }
 
-    for (const mismatch of attempt.mismatches) {
-      if (mismatch.field !== "relationTypeId") {
-        continue;
-      }
+    const task = restoreTaskById.get(attempt.hiddenTaskId);
+    const benchmarkRelation = task
+      ? relationById.get(task.benchmarkRelationId)
+      : undefined;
+    const relationTypeId =
+      benchmarkRelation?.relationTypeId ??
+      attempt.mismatches.find((mismatch) => mismatch.field === "relationTypeId")
+        ?.expected;
 
-      const key = mismatch.proposed;
-      const existing = grouped.get(key) ?? {
-        relationTypeId: mismatch.proposed,
-        reasons: [],
-      };
+    if (!relationTypeId) {
+      continue;
+    }
+
+    const key = [
+      relationTypeId,
+      benchmarkRelation?.sourceNodeId,
+      benchmarkRelation?.targetNodeId,
+      benchmarkRelation?.evidenceChunkId,
+    ].join(":");
+    const existing = grouped.get(key) ?? {
+      relationTypeId,
+      sourceNodeId: benchmarkRelation?.sourceNodeId,
+      targetNodeId: benchmarkRelation?.targetNodeId,
+      evidenceChunkId: benchmarkRelation?.evidenceChunkId,
+      reasons: [],
+    };
+
+    for (const mismatch of attempt.mismatches) {
+      const fieldLabel = mismatchFieldLabels[mismatch.field];
 
       existing.reasons.push(
-        `Hidden relation task ${attempt.hiddenTaskId} proposed "${mismatch.proposed}" instead of "${mismatch.expected}".`,
+        `Task ${attempt.hiddenTaskId} mismatched the ${fieldLabel}: proposed "${mismatch.proposed}" instead of "${mismatch.expected}".`,
       );
-      grouped.set(key, existing);
     }
+
+    grouped.set(key, existing);
   }
 
   return Array.from(grouped.values()).sort((left, right) =>
     left.relationTypeId.localeCompare(right.relationTypeId),
   );
 }
+
+const mismatchFieldLabels = {
+  sourceNodeId: "source node",
+  targetNodeId: "target node",
+  relationTypeId: "relation type",
+} as const;
 
 function buildSummary(
   attemptMistakeCount: number,

@@ -43,17 +43,6 @@ export function QuizTakePanel({
     [result.benchmarkOntology.nodes],
   );
 
-  const relationTypeNameById = useMemo(
-    () =>
-      new Map(
-        result.relationTypes.map((relationType) => [
-          relationType.id,
-          relationType.name,
-        ]),
-      ),
-    [result.relationTypes],
-  );
-
   const allEvaluated = useMemo(
     () => areAllQuizQuestionsEvaluated(session),
     [session],
@@ -224,11 +213,45 @@ export function QuizTakePanel({
   return (
     <div className="detail-content quiz-take-layout">
       <div className="quiz-progress-header">
-        <span className="quiz-progress-count">Edge quiz · {questions.length} questions</span>
+        <span className="quiz-progress-count">Quiz + debugging loop · 3 rounds</span>
         <span className="quiz-progress-answered">
           Graded {questions.filter((q) => questionStateById[q.id]?.evaluation).length} /{" "}
           {questions.length}
         </span>
+      </div>
+
+      <div className="quiz-loop-tracker" aria-label="Three quiz and debugging rounds">
+        {questions.map((question, index) => {
+          const state = questionStateById[question.id];
+          const evaluation = state?.evaluation;
+          const isCorrect = evaluation?.result === "correct";
+          const hasDebug = state?.debugGuidance !== null;
+          const statusLabel = !evaluation
+            ? "Answer"
+            : isCorrect
+              ? "Correct"
+              : hasDebug
+                ? "Debug ready"
+                : "Debug";
+
+          return (
+            <span
+              className={`quiz-loop-tracker-item ${
+                !evaluation
+                  ? ""
+                  : isCorrect
+                    ? "correct"
+                    : hasDebug
+                      ? "debugged"
+                      : "needs-debug"
+              }`}
+              key={question.id}
+            >
+              <strong>{index + 1}</strong>
+              {statusLabel}
+            </span>
+          );
+        })}
       </div>
 
       <div className="edge-quiz-list">
@@ -242,7 +265,10 @@ export function QuizTakePanel({
 
           return (
             <article className="edge-quiz-card" key={question.id}>
-              <p className="quiz-question-label">Edge {index + 1}</p>
+              <div className="edge-quiz-card-header">
+                <p className="quiz-question-label">Round {index + 1} of 3</p>
+                <span className="quiz-loop-mini">Answer → Debug → Diagnosis input</span>
+              </div>
               <h3 className="quiz-question-prompt">
                 {sourceName} → ??? → {targetName}
               </h3>
@@ -283,12 +309,7 @@ export function QuizTakePanel({
                   </strong>
                   <p>{questionState.evaluation?.message}</p>
                   {questionState.evaluation?.result === "incorrect" ? (
-                    <p>
-                      Correct relation type:{" "}
-                      {relationTypeNameById.get(
-                        questionState.evaluation.correctRelationTypeId,
-                      ) ?? questionState.evaluation.correctRelationTypeId}
-                    </p>
+                    <p>Use the debugging prompts below before revising your relation judgment.</p>
                   ) : null}
                 </article>
               ) : null}

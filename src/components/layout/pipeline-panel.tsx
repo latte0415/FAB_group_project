@@ -23,6 +23,7 @@ export function PipelinePanel({
         const isCompleted = completedStepIndexes.has(index);
         const isActive = activeStep === index;
         const isReachable = index <= maxNavigableStep;
+        const isQuizLoopStep = step.id === "edge-quiz-debugging";
 
         return (
           <button
@@ -43,6 +44,11 @@ export function PipelinePanel({
               {isCompleted ? "✓" : String(index + 1).padStart(2, "0")}
             </span>
             <span className="pipeline-step-label">{step.label}</span>
+            {isQuizLoopStep ? (
+              <span className="pipeline-step-loop" aria-label="3 repeated quiz and debugging rounds">
+                3 rounds
+              </span>
+            ) : null}
           </button>
         );
       })}

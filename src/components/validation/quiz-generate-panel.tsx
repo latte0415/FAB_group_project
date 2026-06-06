@@ -72,9 +72,18 @@ export function QuizGeneratePanel({
 
   return (
     <div className="detail-content">
+      <div className="quiz-loop-overview">
+        {[1, 2, 3].map((round) => (
+          <div className="quiz-loop-step" key={round}>
+            <strong>{round}</strong>
+            <span>Quiz edge</span>
+            <small>answer + evidence debug</small>
+          </div>
+        ))}
+      </div>
       <p className="validation-hint">
-        Selects 3 quiz questions from {benchmarkOntology.relations.length} verified
-        edges.
+        Selects three evidence-backed edges from {benchmarkOntology.relations.length} verified
+        relations. Each selected edge becomes one quiz and debugging round.
       </p>
 
       <button
@@ -93,8 +102,14 @@ export function QuizGeneratePanel({
       {session.questions.length > 0 ? (
         <>
           <div className="panel-heading">
-            <h3>Selected edges</h3>
-            <strong>{session.questions.length}</strong>
+            <div>
+              <h3>Selected quiz loop</h3>
+              <p>
+                Verified benchmark edges chosen as the basis for the three quiz
+                rounds.
+              </p>
+            </div>
+            <strong>{session.questions.length} / 3</strong>
           </div>
           <div className="scroll-list compact-scroll">
             {session.questions.map((question, index) => {
