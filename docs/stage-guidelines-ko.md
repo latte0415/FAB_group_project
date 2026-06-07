@@ -181,13 +181,13 @@ candidate relation 중 source chunk와 evidence text가 맞는 relation만 verif
 
 ### 말할 내용
 
-- Project final outline에 따르면, benchmark ontology의 모든 relation은 source sentence, page 또는 section 정보, evidence를 반드시 가져야 한다. LLM이 course note 밖의 추론으로 relation을 추가해서는 안 된다.
+- Benchmark ontology의 모든 relation은 source sentence, page 또는 section 정보, evidence를 가진다. LLM이 course note 밖의 추론으로 relation을 추가지 않는다.
 - Evidence verification은 extraction 단계에서 제안된 candidate relation 중, evidence text가 실제 source chunk 원문에 포함되는지, source·target concept이 해당 chunk에 등장하는지, status가 supported인지를 확인하는 과정이다.
 - Evidence가 충분하지 않거나 chunk와 맞지 않는 relation은 unsupported로 남기고, 검증을 통과한 relation만 verified로 승격한다. LLM output은 schema validation과 evidence verification을 통과한 뒤에만 domain object로 취급한다.
 
 ### 대본 (Script)
 
-As our project outline states, every relation in the benchmark ontology must carry a source sentence, location information, and evidence. The LLM must not add relations based on inference outside the course note.
+Every relation in the benchmark ontology has a source sentence, page or section information, and supporting evidence. The LLM does not add relations through inference beyond the course note.
 
 Evidence verification checks each candidate relation from extraction. We confirm that the cited evidence text actually appears in the referenced source chunk, that both source and target concepts appear in that chunk, and that the candidate is marked as supported.
 
